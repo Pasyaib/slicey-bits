@@ -68,27 +68,27 @@ const AnimatedSpider = () => {
           <div className="relative flex flex-col items-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))" }}>
             
             {/* Left legs */}
-            <svg className="absolute -left-6 top-4 w-8 h-10" viewBox="0 0 32 40" style={{ transform: "scaleX(-1)" }}>
-              <path d="M30 8 Q20 5, 8 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-1 0.4s ease-in-out infinite" }} className="text-foreground" />
-              <path d="M30 15 Q18 12, 4 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-2 0.4s ease-in-out infinite 0.1s" }} className="text-foreground" />
-              <path d="M30 22 Q18 22, 4 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-3 0.4s ease-in-out infinite 0.2s" }} className="text-foreground" />
-              <path d="M30 29 Q20 32, 8 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-4 0.4s ease-in-out infinite 0.3s" }} className="text-foreground" />
+            <svg className="absolute -left-6 top-4 w-8 h-10" viewBox="0 0 32 40">
+              <path d="M30 8 Q22 5, 8 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-left-1 0.4s ease-in-out infinite" }} className="text-foreground" />
+              <path d="M30 15 Q20 12, 4 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-left-2 0.4s ease-in-out infinite 0.1s" }} className="text-foreground" />
+              <path d="M30 22 Q20 22, 4 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-left-3 0.4s ease-in-out infinite 0.2s" }} className="text-foreground" />
+              <path d="M30 29 Q22 32, 8 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-left-4 0.4s ease-in-out infinite 0.3s" }} className="text-foreground" />
             </svg>
 
             {/* Right legs */}
             <svg className="absolute -right-6 top-4 w-8 h-10" viewBox="0 0 32 40">
-              <path d="M2 8 Q12 5, 24 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-1 0.4s ease-in-out infinite 0.05s" }} className="text-foreground" />
-              <path d="M2 15 Q14 12, 28 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-2 0.4s ease-in-out infinite 0.15s" }} className="text-foreground" />
-              <path d="M2 22 Q14 22, 28 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-3 0.4s ease-in-out infinite 0.25s" }} className="text-foreground" />
-              <path d="M2 29 Q12 32, 24 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-4 0.4s ease-in-out infinite 0.35s" }} className="text-foreground" />
+              <path d="M2 8 Q10 5, 24 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-right-1 0.4s ease-in-out infinite 0.05s" }} className="text-foreground" />
+              <path d="M2 15 Q12 12, 28 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-right-2 0.4s ease-in-out infinite 0.15s" }} className="text-foreground" />
+              <path d="M2 22 Q12 22, 28 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-right-3 0.4s ease-in-out infinite 0.25s" }} className="text-foreground" />
+              <path d="M2 29 Q10 32, 24 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-right-4 0.4s ease-in-out infinite 0.35s" }} className="text-foreground" />
             </svg>
 
             {/* Head */}
@@ -190,21 +190,37 @@ const AnimatedSpider = () => {
           0%, 100% { transform: translateX(-3px) rotate(-8deg); }
           50% { transform: translateX(3px) rotate(8deg); }
         }
-        @keyframes leg-crawl-1 {
-          0%, 100% { d: path('M30 8 Q20 5, 8 2'); }
-          50% { d: path('M30 8 Q22 3, 12 0'); }
+        @keyframes leg-crawl-left-1 {
+          0%, 100% { d: path('M30 8 Q22 5, 8 2'); }
+          50% { d: path('M30 8 Q24 3, 10 0'); }
         }
-        @keyframes leg-crawl-2 {
-          0%, 100% { d: path('M30 15 Q18 12, 4 10'); }
-          50% { d: path('M30 15 Q20 10, 8 6'); }
+        @keyframes leg-crawl-left-2 {
+          0%, 100% { d: path('M30 15 Q20 12, 4 10'); }
+          50% { d: path('M30 15 Q22 10, 6 6'); }
         }
-        @keyframes leg-crawl-3 {
-          0%, 100% { d: path('M30 22 Q18 22, 4 24'); }
-          50% { d: path('M30 22 Q20 24, 8 28'); }
+        @keyframes leg-crawl-left-3 {
+          0%, 100% { d: path('M30 22 Q20 22, 4 24'); }
+          50% { d: path('M30 22 Q22 24, 6 28'); }
         }
-        @keyframes leg-crawl-4 {
-          0%, 100% { d: path('M30 29 Q20 32, 8 38'); }
-          50% { d: path('M30 29 Q22 34, 12 42'); }
+        @keyframes leg-crawl-left-4 {
+          0%, 100% { d: path('M30 29 Q22 32, 8 38'); }
+          50% { d: path('M30 29 Q24 34, 10 42'); }
+        }
+        @keyframes leg-crawl-right-1 {
+          0%, 100% { d: path('M2 8 Q10 5, 24 2'); }
+          50% { d: path('M2 8 Q8 3, 22 0'); }
+        }
+        @keyframes leg-crawl-right-2 {
+          0%, 100% { d: path('M2 15 Q12 12, 28 10'); }
+          50% { d: path('M2 15 Q10 10, 26 6'); }
+        }
+        @keyframes leg-crawl-right-3 {
+          0%, 100% { d: path('M2 22 Q12 22, 28 24'); }
+          50% { d: path('M2 22 Q10 24, 26 28'); }
+        }
+        @keyframes leg-crawl-right-4 {
+          0%, 100% { d: path('M2 29 Q10 32, 24 38'); }
+          50% { d: path('M2 29 Q8 34, 22 42'); }
         }
         @keyframes mouth-smile {
           0%, 40%, 100% { transform: scaleX(1); }
