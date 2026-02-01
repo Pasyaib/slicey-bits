@@ -4,7 +4,6 @@ import explorationDetail1 from "@/assets/exploration-detail-1.png";
 import explorationDetail2 from "@/assets/exploration-detail-2.png";
 import explorationDetail3 from "@/assets/exploration-detail-3.png";
 import explorationDetail4 from "@/assets/exploration-detail-4.png";
-import explorationDetail5 from "@/assets/exploration-detail-5.png";
 
 const ExplorationDetail = () => {
   const images = [
@@ -12,7 +11,6 @@ const ExplorationDetail = () => {
     explorationDetail2,
     explorationDetail3,
     explorationDetail4,
-    explorationDetail5,
   ];
 
   return (
