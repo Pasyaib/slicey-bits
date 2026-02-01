@@ -1,11 +1,14 @@
 import SectionHeader from "./SectionHeader";
 import ExplorationItem from "./ExplorationItem";
-import exploration2 from "@/assets/exploration-2.jpg";
 import exploration3 from "@/assets/exploration-3.jpg";
 import explorationDetail1 from "@/assets/exploration-detail-1.png";
 import explorationDetail2 from "@/assets/exploration-detail-2.png";
 import explorationDetail3 from "@/assets/exploration-detail-3.png";
 import explorationDetail4 from "@/assets/exploration-detail-4.png";
+import kineticPoster1 from "@/assets/kinetic-poster-1.png";
+import kineticPoster2 from "@/assets/kinetic-poster-2.png";
+import kineticPoster3 from "@/assets/kinetic-poster-3.png";
+import kineticPoster4 from "@/assets/kinetic-poster-4.png";
 
 const explorations = [
   {
@@ -15,9 +18,10 @@ const explorations = [
     slug: "composition-series",
   },
   {
-    images: [exploration2, exploration2, exploration2, exploration2],
+    images: [kineticPoster1, kineticPoster2, kineticPoster3, kineticPoster4],
     category: "TYPOGRAPHY",
     title: "Kinetic Poster 04",
+    slug: "kinetic-poster",
   },
   {
     images: [exploration3, exploration3, exploration3, exploration3],

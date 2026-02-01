@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import ExplorationDetail from "./pages/ExplorationDetail";
+import KineticPosterDetail from "./pages/KineticPosterDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/exploration/composition-series" element={<ExplorationDetail />} />
+          <Route path="/exploration/kinetic-poster" element={<KineticPosterDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
