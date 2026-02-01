@@ -16,20 +16,20 @@ import neuralPatterns4 from "@/assets/neural-patterns-4.png";
 const explorations = [
   {
     images: [explorationDetail1, explorationDetail2, explorationDetail3, explorationDetail4],
-    category: "CONCEPT",
-    title: "Composition Series",
+    category: "ADMIN PANEL",
+    title: "Awacs Admin Panel",
     slug: "composition-series",
   },
   {
     images: [kineticPoster1, kineticPoster2, kineticPoster3, kineticPoster4],
-    category: "TYPOGRAPHY",
-    title: "Kinetic Poster 04",
+    category: "ADMIN PANEL",
+    title: "F1 Admin Panel",
     slug: "kinetic-poster",
   },
   {
     images: [neuralPatterns1, neuralPatterns2, neuralPatterns3, neuralPatterns4],
-    category: "3D",
-    title: "Neural Patterns",
+    category: "SYSTEM",
+    title: "Satcom",
     slug: "neural-patterns",
   },
 ];
