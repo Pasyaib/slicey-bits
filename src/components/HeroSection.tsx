@@ -14,7 +14,7 @@ const HeroSection = () => {
           enhance user experiences.
         </p>
         <Button asChild size="lg" className="gap-2">
-          <a href="mailto:sultanibrahimpasya@gmail.com">
+          <a href="mailto:pasyaibrhm@gmail.com">
             <Mail className="w-4 h-4" />
             Get in Touch
           </a>
