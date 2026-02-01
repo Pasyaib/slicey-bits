@@ -1,4 +1,10 @@
 import SectionHeader from "./SectionHeader";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const experiences = [
   {
@@ -64,27 +70,27 @@ const Experience = () => {
     <section className="container-portfolio section-spacing">
       <SectionHeader title="Experience" number="03" />
 
-      <div className="space-y-0">
+      <Accordion type="single" collapsible className="w-full">
         {experiences.map((exp, index) => (
-          <div
-            key={index}
-            className="grid md:grid-cols-[1fr_2fr] gap-4 md:gap-8 py-8 border-b border-border group"
-          >
-            {/* Left Column */}
-            <div className="space-y-1">
-              <h3 className="text-lg font-medium">{exp.company}</h3>
-              <p className="text-sm text-muted-foreground">{exp.period}</p>
-              <p className="text-sm text-muted-foreground">{exp.location}</p>
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">{exp.role}</p>
-              <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
-            </div>
-          </div>
+          <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
+            <AccordionTrigger className="py-6 hover:no-underline group">
+              <div className="grid md:grid-cols-[1fr_1fr_1fr] gap-4 md:gap-8 w-full text-left pr-4">
+                <h3 className="text-lg font-medium group-hover:text-muted-foreground transition-colors">
+                  {exp.company}
+                </h3>
+                <p className="text-sm text-muted-foreground">{exp.role}</p>
+                <p className="text-sm text-muted-foreground md:text-right">{exp.period}</p>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pb-6">
+              <div className="grid md:grid-cols-[1fr_2fr] gap-4 md:gap-8">
+                <p className="text-sm text-muted-foreground">{exp.location}</p>
+                <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
         ))}
-      </div>
+      </Accordion>
     </section>
   );
 };
