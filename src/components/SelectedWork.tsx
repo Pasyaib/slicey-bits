@@ -9,12 +9,14 @@ const projects = [
     title: "Aether Banking",
     description: "A futuristic fintech dashboard focusing on negative space and monochromatic data visualization.",
     category: "WEB",
+    slug: "aether-banking",
   },
   {
     image: projectAI,
     title: "Ocular AI",
     description: "Interface for a computer vision model, prioritizing readability and real-time inference feedback.",
     category: "AI",
+    slug: "ocular-ai",
   },
 ];
 
