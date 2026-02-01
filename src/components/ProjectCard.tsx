@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 interface ProjectCardProps {
   image: string;
@@ -10,16 +9,26 @@ interface ProjectCardProps {
   externalLink?: string;
 }
 
-const ProjectCard = ({ image, title, description, category, slug, externalLink }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, externalLink }: ProjectCardProps) => {
   return (
     <article className="group">
-      <Link to={`/project/${slug}`} className="block overflow-hidden mb-6">
-        <img
-          src={image}
-          alt={title}
-          className="project-image group-hover:scale-105 transition-transform duration-500"
-        />
-      </Link>
+      {externalLink ? (
+        <a href={externalLink} target="_blank" rel="noopener noreferrer" className="block overflow-hidden mb-6">
+          <img
+            src={image}
+            alt={title}
+            className="project-image group-hover:scale-105 transition-transform duration-500"
+          />
+        </a>
+      ) : (
+        <div className="block overflow-hidden mb-6">
+          <img
+            src={image}
+            alt={title}
+            className="project-image"
+          />
+        </div>
+      )}
       
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-xl font-medium">{title}</h3>
@@ -30,24 +39,17 @@ const ProjectCard = ({ image, title, description, category, slug, externalLink }
         {description}
       </p>
       
-      <div className="flex flex-wrap gap-3">
-        <Link to={`/project/${slug}`} className="btn-outline-portfolio">
-          View Case Study
+      {externalLink && (
+        <a 
+          href={externalLink} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="btn-outline-portfolio"
+        >
+          View Live
           <ArrowUpRight className="w-4 h-4" />
-        </Link>
-        
-        {externalLink && (
-          <a 
-            href={externalLink} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="btn-outline-portfolio"
-          >
-            View Live
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-        )}
-      </div>
+        </a>
+      )}
     </article>
   );
 };
