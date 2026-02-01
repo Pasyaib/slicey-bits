@@ -1,12 +1,15 @@
 import SectionHeader from "./SectionHeader";
 import ExplorationItem from "./ExplorationItem";
-import exploration1 from "@/assets/exploration-1.jpg";
 import exploration2 from "@/assets/exploration-2.jpg";
 import exploration3 from "@/assets/exploration-3.jpg";
+import explorationDetail1 from "@/assets/exploration-detail-1.png";
+import explorationDetail2 from "@/assets/exploration-detail-2.png";
+import explorationDetail3 from "@/assets/exploration-detail-3.png";
+import explorationDetail4 from "@/assets/exploration-detail-4.png";
 
 const explorations = [
   {
-    images: [exploration1, exploration1, exploration1, exploration1],
+    images: [explorationDetail1, explorationDetail2, explorationDetail3, explorationDetail4],
     category: "CONCEPT",
     title: "Composition Series",
     slug: "composition-series",
