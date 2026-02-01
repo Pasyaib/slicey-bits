@@ -7,9 +7,10 @@ interface ProjectCardProps {
   category: string;
   slug: string;
   externalLink?: string;
+  status?: string;
 }
 
-const ProjectCard = ({ image, title, description, category, externalLink }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, externalLink, status }: ProjectCardProps) => {
   return (
     <article className="group">
       {externalLink ? (
@@ -39,7 +40,7 @@ const ProjectCard = ({ image, title, description, category, externalLink }: Proj
         {description}
       </p>
       
-      {externalLink && (
+      {externalLink ? (
         <a 
           href={externalLink} 
           target="_blank" 
@@ -49,7 +50,11 @@ const ProjectCard = ({ image, title, description, category, externalLink }: Proj
           View Live
           <ArrowUpRight className="w-4 h-4" />
         </a>
-      )}
+      ) : status ? (
+        <span className="text-sm text-muted-foreground font-mono">
+          {status}
+        </span>
+      ) : null}
     </article>
   );
 };
