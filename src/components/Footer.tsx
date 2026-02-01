@@ -1,60 +1,32 @@
-import { ArrowUpRight } from "lucide-react";
-
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="container-portfolio py-16 border-t border-border">
-      <div className="grid md:grid-cols-3 gap-12 md:gap-8">
-        {/* Contact */}
-        <div>
-          <span className="section-label block mb-6">Contact</span>
-          <a
-            href="mailto:hello@sultanpasya.com"
-            className="text-lg font-medium hover:text-muted-foreground transition-colors"
-          >
-            hello@sultanpasya.com
-          </a>
-        </div>
+    <footer className="container-portfolio py-24 md:py-32">
+      {/* Section Label */}
+      <div className="mb-8">
+        <span className="section-label">(05) — CONTACT</span>
+      </div>
 
-        {/* Social */}
-        <div>
-          <span className="section-label block mb-6">Social</span>
-          <ul className="space-y-3">
-            <li>
-              <a
-                href="https://www.linkedin.com/in/sultanibrahimpasya/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium hover:text-muted-foreground transition-colors"
-              >
-                LinkedIn
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://x.com/nonamefuvk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium hover:text-muted-foreground transition-colors"
-              >
-                X
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </li>
-          </ul>
-        </div>
+      {/* Large Headline */}
+      <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight mb-16 max-w-4xl">
+        Let's build something meaningless together.
+      </h2>
 
-        {/* Copyright */}
-        <div className="md:text-right">
-          <span className="section-label block mb-6">© {currentYear}</span>
-          <p className="text-muted-foreground">
-            Designed & Built by
-            <br />
-            Sultan Ibrahim Pasya
-          </p>
-        </div>
+      {/* Links */}
+      <div className="flex flex-wrap gap-8">
+        <a
+          href="mailto:Pasyaibrhm@gmail.com"
+          className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
+        >
+          Pasyaibrhm@gmail.com
+        </a>
+        <a
+          href="https://www.linkedin.com/in/sultanibrahimpasya/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
+        >
+          LinkedIn
+        </a>
       </div>
     </footer>
   );
