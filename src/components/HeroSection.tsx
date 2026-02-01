@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -13,12 +13,20 @@ const HeroSection = () => {
           Media. I focus on developing designs that meet business needs and
           enhance user experiences.
         </p>
-        <Button asChild size="lg" className="gap-2">
-          <a href="mailto:pasyaibrhm@gmail.com">
-            <Mail className="w-4 h-4" />
-            Get in Touch
-          </a>
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild size="lg" className="gap-2">
+            <a href="mailto:pasyaibrhm@gmail.com">
+              <Mail className="w-4 h-4" />
+              Get in Touch
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="gap-2">
+            <a href="https://instagram.com/mediocre.works" target="_blank" rel="noopener noreferrer">
+              <Instagram className="w-4 h-4" />
+              @mediocre.works
+            </a>
+          </Button>
+        </div>
       </div>
     </section>
   );
