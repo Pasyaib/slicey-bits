@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import kineticPoster1 from "@/assets/kinetic-poster-1.png";
 import kineticPoster2 from "@/assets/kinetic-poster-2.png";
 import kineticPoster3 from "@/assets/kinetic-poster-3.png";
@@ -17,55 +17,52 @@ const KineticPosterDetail = () => {
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Back navigation */}
-      <nav className="container-portfolio py-8">
+      {/* Minimal Header */}
+      <nav className="container-portfolio py-8 flex items-center justify-between">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Portfolio
+          Back
         </Link>
+        <span className="text-xs text-muted-foreground font-mono">02 / 03</span>
       </nav>
 
-      {/* Hero */}
-      <header className="container-portfolio pb-16">
-        <div className="flex items-baseline justify-between mb-6">
-          <span className="section-label">TYPOGRAPHY</span>
-          <span className="section-number">2025</span>
-        </div>
-        <h1 className="mb-8">Kinetic Poster 04</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-          An exploration of motion and typography through dynamic poster design. 
-          Each piece captures the energy of movement through carefully crafted typographic elements.
-        </p>
+      {/* Title Only */}
+      <header className="container-portfolio py-12 md:py-20">
+        <span className="text-xs text-muted-foreground uppercase tracking-widest block mb-4">
+          Typography
+        </span>
+        <h1 className="text-4xl md:text-6xl font-medium tracking-tight">
+          Kinetic Poster 04
+        </h1>
       </header>
 
-      {/* Images Grid */}
-      <section className="container-portfolio pb-20">
-        <div className="grid gap-6">
+      {/* Full-bleed Images */}
+      <section className="pb-20">
+        <div className="space-y-1">
           {images.map((img, index) => (
-            <div key={index} className="overflow-hidden">
+            <div key={index}>
               <img
                 src={img}
                 alt={`Kinetic Poster ${index + 1}`}
-                className="w-full object-cover"
+                className="w-full"
               />
             </div>
           ))}
         </div>
       </section>
 
-      {/* Back to Portfolio */}
-      <section className="container-portfolio py-20 border-t border-border">
-        <Link to="/" className="btn-outline-portfolio">
-          View All Explorations
-          <ArrowUpRight className="w-4 h-4" />
+      {/* Minimal Footer */}
+      <footer className="container-portfolio py-12 border-t border-border">
+        <Link 
+          to="/" 
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          ← All Explorations
         </Link>
-      </section>
-
-      {/* Footer spacing */}
-      <div className="h-16" />
+      </footer>
     </main>
   );
 };
