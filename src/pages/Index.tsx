@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import SelectedWork from "@/components/SelectedWork";
 import Explorations from "@/components/Explorations";
 import Experience from "@/components/Experience";
+import Skills from "@/components/Skills";
 import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 import FloatingHelpButton from "@/components/FloatingHelpButton";
@@ -13,6 +14,7 @@ const Index = () => {
       <SelectedWork />
       <Explorations />
       <Experience />
+      <Skills />
       <Capabilities />
       <Footer />
       <FloatingHelpButton />
