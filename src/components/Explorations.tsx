@@ -9,6 +9,7 @@ const explorations = [
     images: [exploration1, exploration1, exploration1, exploration1],
     category: "CONCEPT",
     title: "Composition Series",
+    slug: "composition-series",
   },
   {
     images: [exploration2, exploration2, exploration2, exploration2],
