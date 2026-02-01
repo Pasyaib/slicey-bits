@@ -1,22 +1,46 @@
 import SectionHeader from "./SectionHeader";
 import ProjectCard from "./ProjectCard";
-import projectBanking from "@/assets/project-banking.jpg";
-import projectAI from "@/assets/project-ai.jpg";
+import projectGodly from "@/assets/project-godly.jpg";
+import projectInact from "@/assets/project-inact.jpg";
+import projectNiseko from "@/assets/project-niseko.jpg";
+import projectQris from "@/assets/project-qris.jpg";
+import projectTgv from "@/assets/project-tgv.jpg";
 
 const projects = [
   {
-    image: projectBanking,
-    title: "Aether Banking",
-    description: "A futuristic fintech dashboard focusing on negative space and monochromatic data visualization.",
+    image: projectGodly,
+    title: "Godly",
+    description: "Window cleaning & pressure washing services landing page with modern UI design for South Florida market.",
     category: "WEB",
-    slug: "aether-banking",
+    slug: "godly",
   },
   {
-    image: projectAI,
-    title: "Ocular AI",
-    description: "Interface for a computer vision model, prioritizing readability and real-time inference feedback.",
-    category: "AI",
-    slug: "ocular-ai",
+    image: projectInact,
+    title: "InAct HRIS",
+    description: "Human Resource Information System mobile app for attendance tracking, scheduling, and employee management.",
+    category: "APP",
+    slug: "inact",
+  },
+  {
+    image: projectNiseko,
+    title: "Niseko Home",
+    description: "Luxury real estate platform for discovering and investing in exclusive properties in Niseko, Japan.",
+    category: "WEB",
+    slug: "niseko",
+  },
+  {
+    image: projectQris,
+    title: "QRIS Online",
+    description: "Payment registration flow for QRIS merchant onboarding with document verification and business data collection.",
+    category: "APP",
+    slug: "qris",
+  },
+  {
+    image: projectTgv,
+    title: "TGV SNCF",
+    description: "Train booking interface redesign for TGV inOui with AI-powered search and modern ticketing experience.",
+    category: "APP",
+    slug: "tgv",
   },
 ];
 
