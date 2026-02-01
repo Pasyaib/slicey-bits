@@ -4,6 +4,7 @@ import kineticPoster1 from "@/assets/kinetic-poster-1.png";
 import kineticPoster2 from "@/assets/kinetic-poster-2.png";
 import kineticPoster3 from "@/assets/kinetic-poster-3.png";
 import kineticPoster4 from "@/assets/kinetic-poster-4.png";
+import kineticPoster5 from "@/assets/kinetic-poster-5.png";
 
 const KineticPosterDetail = () => {
   const images = [
@@ -11,6 +12,7 @@ const KineticPosterDetail = () => {
     kineticPoster2,
     kineticPoster3,
     kineticPoster4,
+    kineticPoster5,
   ];
 
   return (
