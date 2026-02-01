@@ -21,6 +21,7 @@ const projects = [
     description: "Human Resource Information System mobile app for attendance tracking, scheduling, and employee management.",
     category: "APP",
     slug: "inact",
+    externalLink: "https://play.google.com/store/search?q=inact+hris&c=apps&hl=id",
   },
   {
     image: projectNiseko,
@@ -28,6 +29,7 @@ const projects = [
     description: "Luxury real estate platform for discovering and investing in exclusive properties in Niseko, Japan.",
     category: "WEB",
     slug: "niseko",
+    status: "MVP Only",
   },
   {
     image: projectQris,
@@ -43,6 +45,7 @@ const projects = [
     description: "Train booking interface redesign for TGV inOui with AI-powered search and modern ticketing experience.",
     category: "APP",
     slug: "tgv",
+    status: "MVP Only",
   },
 ];
 
