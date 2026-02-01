@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import SelectedWork from "@/components/SelectedWork";
 import Explorations from "@/components/Explorations";
 import Capabilities from "@/components/Capabilities";
+import Footer from "@/components/Footer";
 import FloatingHelpButton from "@/components/FloatingHelpButton";
 
 const Index = () => {
@@ -11,10 +12,8 @@ const Index = () => {
       <SelectedWork />
       <Explorations />
       <Capabilities />
+      <Footer />
       <FloatingHelpButton />
-      
-      {/* Footer spacing */}
-      <div className="h-32" />
     </main>
   );
 };
