@@ -72,20 +72,58 @@ const Experience = () => {
 
       <Accordion type="single" collapsible className="w-full">
         {experiences.map((exp, index) => (
-          <AccordionItem key={index} value={`item-${index}`} className="border-b border-border">
-            <AccordionTrigger className="py-6 hover:no-underline group">
-              <div className="grid md:grid-cols-[1fr_1fr_1fr] gap-4 md:gap-8 w-full text-left pr-4">
-                <h3 className="text-lg font-medium group-hover:text-muted-foreground transition-colors">
+          <AccordionItem 
+            key={index} 
+            value={`item-${index}`} 
+            className="border-b border-border py-2 group"
+          >
+            <AccordionTrigger className="py-6 hover:no-underline [&[data-state=open]>div>.company-name]:text-foreground">
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-0 w-full text-left pr-4">
+                {/* Index Number */}
+                <span className="text-xs text-muted-foreground font-mono md:w-12 shrink-0">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                
+                {/* Company */}
+                <h3 className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors group-hover:text-muted-foreground">
                   {exp.company}
                 </h3>
-                <p className="text-sm text-muted-foreground">{exp.role}</p>
-                <p className="text-sm text-muted-foreground md:text-right">{exp.period}</p>
+                
+                {/* Role - Hidden on mobile, shown in content */}
+                <p className="hidden md:block text-sm text-muted-foreground md:w-48 shrink-0">
+                  {exp.role}
+                </p>
+                
+                {/* Period */}
+                <p className="text-xs md:text-sm text-muted-foreground md:w-40 shrink-0 md:text-right font-mono">
+                  {exp.period}
+                </p>
               </div>
             </AccordionTrigger>
-            <AccordionContent className="pb-6">
-              <div className="grid md:grid-cols-[1fr_2fr] gap-4 md:gap-8">
-                <p className="text-sm text-muted-foreground">{exp.location}</p>
-                <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
+            
+            <AccordionContent className="overflow-hidden">
+              <div className="pb-6 pt-2 pl-0 md:pl-12">
+                <div className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12">
+                  {/* Meta Info */}
+                  <div className="space-y-4">
+                    <div>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Role</span>
+                      <p className="text-sm font-medium mt-1">{exp.role}</p>
+                    </div>
+                    <div>
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">Location</span>
+                      <p className="text-sm font-medium mt-1">{exp.location}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Description */}
+                  <div>
+                    <span className="text-xs text-muted-foreground uppercase tracking-wider">Overview</span>
+                    <p className="text-muted-foreground leading-relaxed mt-2 max-w-xl">
+                      {exp.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             </AccordionContent>
           </AccordionItem>
