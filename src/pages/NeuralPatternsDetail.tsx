@@ -32,10 +32,10 @@ const NeuralPatternsDetail = () => {
       {/* Title Only */}
       <header className="container-portfolio py-12 md:py-20">
         <span className="text-xs text-muted-foreground uppercase tracking-widest block mb-4">
-          3D
+          System
         </span>
         <h1 className="text-4xl md:text-6xl font-medium tracking-tight">
-          Neural Patterns
+          Satcom
         </h1>
       </header>
 

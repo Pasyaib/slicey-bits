@@ -32,10 +32,10 @@ const KineticPosterDetail = () => {
       {/* Title Only */}
       <header className="container-portfolio py-12 md:py-20">
         <span className="text-xs text-muted-foreground uppercase tracking-widest block mb-4">
-          Typography
+          Admin Panel
         </span>
         <h1 className="text-4xl md:text-6xl font-medium tracking-tight">
-          Kinetic Poster 04
+          F1 Admin Panel
         </h1>
       </header>
 
