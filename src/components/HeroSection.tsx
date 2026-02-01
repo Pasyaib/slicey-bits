@@ -21,7 +21,7 @@ const HeroSection = () => {
             </a>
           </Button>
           <Button asChild size="lg" variant="outline" className="gap-2">
-            <a href="https://instagram.com/mediocre.works" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/mediocre.works/" target="_blank" rel="noopener noreferrer">
               <Instagram className="w-4 h-4" />
               @mediocre.works
             </a>
