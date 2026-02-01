@@ -23,7 +23,7 @@ const Footer = () => {
           <ul className="space-y-3">
             <li>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/sultanibrahimpasya/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium hover:text-muted-foreground transition-colors"
@@ -34,23 +34,12 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://dribbble.com"
+                href="https://x.com/nonamefuvk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-medium hover:text-muted-foreground transition-colors"
               >
-                Dribbble
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-medium hover:text-muted-foreground transition-colors"
-              >
-                Twitter
+                X
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </li>
