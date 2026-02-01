@@ -7,9 +7,10 @@ interface ProjectCardProps {
   description: string;
   category: string;
   slug: string;
+  externalLink?: string;
 }
 
-const ProjectCard = ({ image, title, description, category, slug }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, slug, externalLink }: ProjectCardProps) => {
   return (
     <article className="group">
       <Link to={`/project/${slug}`} className="block overflow-hidden mb-6">
@@ -29,10 +30,24 @@ const ProjectCard = ({ image, title, description, category, slug }: ProjectCardP
         {description}
       </p>
       
-      <Link to={`/project/${slug}`} className="btn-outline-portfolio">
-        View Live Demo
-        <ArrowUpRight className="w-4 h-4" />
-      </Link>
+      <div className="flex flex-wrap gap-3">
+        <Link to={`/project/${slug}`} className="btn-outline-portfolio">
+          View Case Study
+          <ArrowUpRight className="w-4 h-4" />
+        </Link>
+        
+        {externalLink && (
+          <a 
+            href={externalLink} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="btn-outline-portfolio"
+          >
+            View Live
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        )}
+      </div>
     </article>
   );
 };
