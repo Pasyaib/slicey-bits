@@ -4,142 +4,211 @@ const AnimatedSpider = () => {
   const [isDropped, setIsDropped] = useState(false);
   const [isScared, setIsScared] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
+  const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const dropTimer = setTimeout(() => setIsDropped(true), 1500);
+    const dropTimer = setTimeout(() => setIsDropped(true), 1200);
     
     // Random blinking
     const blinkInterval = setInterval(() => {
       setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), 150);
-    }, 3000);
+      setTimeout(() => setIsBlinking(false), 120);
+    }, 2500 + Math.random() * 2000);
+
+    // Eyes follow mouse slightly
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = Math.max(-2, Math.min(2, (e.clientX - window.innerWidth + 100) / 200));
+      const y = Math.max(-1, Math.min(1, (e.clientY - 100) / 100));
+      setEyeOffset({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       clearTimeout(dropTimer);
       clearInterval(blinkInterval);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   const handleSpiderClick = () => {
     setIsScared(true);
-    setTimeout(() => setIsScared(false), 2000);
+    setTimeout(() => setIsScared(false), 2500);
   };
 
   return (
-    <div className="fixed top-0 right-16 z-50 pointer-events-none">
-      {/* Web thread */}
-      <div 
-        className="w-0.5 bg-gradient-to-b from-muted-foreground/20 to-muted-foreground/40 mx-auto origin-top transition-all duration-1000 ease-out"
-        style={{
-          height: isDropped ? (isScared ? "30px" : "200px") : "0px",
-        }}
-      />
+    <div className="fixed top-0 right-20 z-50 pointer-events-none">
+      {/* Web thread with detail */}
+      <div className="relative mx-auto transition-all duration-1000 ease-out"
+           style={{ height: isDropped ? (isScared ? "40px" : "220px") : "0px" }}>
+        <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-muted-foreground/50 to-muted-foreground/60 left-1/2 -translate-x-1/2" />
+        {/* Web shine */}
+        <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent left-1/2 -translate-x-1/2 ml-px" />
+      </div>
       
       {/* Spider container */}
       <div 
-        className="pointer-events-auto cursor-pointer transition-all"
+        className="pointer-events-auto cursor-pointer"
         onClick={handleSpiderClick}
         style={{
           opacity: isDropped ? 1 : 0,
-          transform: isScared ? "translateY(-170px)" : "translateY(0)",
+          transform: isScared ? "translateY(-180px)" : "translateY(0)",
           transition: isScared 
-            ? "transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
-            : "transform 0.8s ease-out, opacity 0.5s",
+            ? "transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
+            : "transform 1s ease-out, opacity 0.5s",
         }}
       >
         <div 
           className="relative"
           style={{
-            animation: isScared ? "spider-shake 0.1s infinite" : "spider-swing 4s ease-in-out infinite",
+            animation: isScared ? "spider-shake 0.08s infinite" : "spider-swing 3s ease-in-out infinite",
             transformOrigin: "top center",
           }}
         >
-          {/* Spider body */}
-          <div className="relative flex flex-col items-center">
-            {/* Legs left */}
-            <div className="absolute left-1/2 top-1/2 -translate-y-1/2">
-              <div className="flex flex-col gap-1" style={{ transform: "translateX(-20px)" }}>
-                <div className="w-5 h-0.5 bg-foreground rounded-full origin-right" style={{ animation: "leg-wave-1 0.6s ease-in-out infinite", transform: "rotate(-20deg)" }} />
-                <div className="w-6 h-0.5 bg-foreground rounded-full origin-right" style={{ animation: "leg-wave-2 0.6s ease-in-out infinite 0.1s", transform: "rotate(0deg)" }} />
-                <div className="w-6 h-0.5 bg-foreground rounded-full origin-right" style={{ animation: "leg-wave-3 0.6s ease-in-out infinite 0.2s", transform: "rotate(10deg)" }} />
-                <div className="w-5 h-0.5 bg-foreground rounded-full origin-right" style={{ animation: "leg-wave-4 0.6s ease-in-out infinite 0.3s", transform: "rotate(25deg)" }} />
-              </div>
-            </div>
+          <div className="relative flex flex-col items-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))" }}>
             
-            {/* Legs right */}
-            <div className="absolute left-1/2 top-1/2 -translate-y-1/2">
-              <div className="flex flex-col gap-1" style={{ transform: "translateX(2px)" }}>
-                <div className="w-5 h-0.5 bg-foreground rounded-full origin-left" style={{ animation: "leg-wave-1 0.6s ease-in-out infinite 0.15s", transform: "rotate(20deg)" }} />
-                <div className="w-6 h-0.5 bg-foreground rounded-full origin-left" style={{ animation: "leg-wave-2 0.6s ease-in-out infinite 0.25s", transform: "rotate(0deg)" }} />
-                <div className="w-6 h-0.5 bg-foreground rounded-full origin-left" style={{ animation: "leg-wave-3 0.6s ease-in-out infinite 0.35s", transform: "rotate(-10deg)" }} />
-                <div className="w-5 h-0.5 bg-foreground rounded-full origin-left" style={{ animation: "leg-wave-4 0.6s ease-in-out infinite 0.45s", transform: "rotate(-25deg)" }} />
-              </div>
-            </div>
+            {/* Left legs */}
+            <svg className="absolute -left-6 top-4 w-8 h-10" viewBox="0 0 32 40" style={{ transform: "scaleX(-1)" }}>
+              <path d="M30 8 Q20 5, 8 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-1 0.4s ease-in-out infinite" }} className="text-foreground" />
+              <path d="M30 15 Q18 12, 4 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-2 0.4s ease-in-out infinite 0.1s" }} className="text-foreground" />
+              <path d="M30 22 Q18 22, 4 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-3 0.4s ease-in-out infinite 0.2s" }} className="text-foreground" />
+              <path d="M30 29 Q20 32, 8 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-4 0.4s ease-in-out infinite 0.3s" }} className="text-foreground" />
+            </svg>
+
+            {/* Right legs */}
+            <svg className="absolute -right-6 top-4 w-8 h-10" viewBox="0 0 32 40">
+              <path d="M2 8 Q12 5, 24 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-1 0.4s ease-in-out infinite 0.05s" }} className="text-foreground" />
+              <path d="M2 15 Q14 12, 28 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-2 0.4s ease-in-out infinite 0.15s" }} className="text-foreground" />
+              <path d="M2 22 Q14 22, 28 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-3 0.4s ease-in-out infinite 0.25s" }} className="text-foreground" />
+              <path d="M2 29 Q12 32, 24 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                    style={{ animation: "leg-crawl-4 0.4s ease-in-out infinite 0.35s" }} className="text-foreground" />
+            </svg>
 
             {/* Head */}
-            <div className="w-6 h-5 bg-foreground rounded-full relative z-10">
-              {/* Eyes */}
-              <div className="absolute top-1 left-1/2 -translate-x-1/2 flex gap-1">
+            <div className="w-8 h-7 bg-foreground rounded-full relative z-10"
+                 style={{ 
+                   background: "radial-gradient(ellipse at 30% 30%, hsl(var(--foreground) / 0.8), hsl(var(--foreground)))" 
+                 }}>
+              {/* Big cute eyes */}
+              <div className="absolute top-1 left-1/2 -translate-x-1/2 flex gap-0.5">
+                {/* Left eye */}
                 <div 
-                  className="w-2 h-2 bg-background rounded-full flex items-center justify-center transition-all"
-                  style={{ transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)" }}
+                  className="w-3 h-3 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
+                  style={{ transform: isBlinking ? "scaleY(0.15)" : "scaleY(1)" }}
                 >
-                  <div className={`w-1 h-1 bg-foreground rounded-full ${isScared ? "animate-pulse" : ""}`} 
-                       style={{ transform: isScared ? "scale(1.5)" : "scale(1)" }} />
+                  <div 
+                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-150"
+                    style={{ 
+                      left: `${2 + eyeOffset.x}px`, 
+                      top: `${2 + eyeOffset.y}px`,
+                      transform: isScared ? "scale(0.6)" : "scale(1)",
+                    }}
+                  >
+                    {/* Eye shine */}
+                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-80" />
+                  </div>
                 </div>
+                {/* Right eye */}
                 <div 
-                  className="w-2 h-2 bg-background rounded-full flex items-center justify-center transition-all"
-                  style={{ transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)" }}
+                  className="w-3 h-3 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
+                  style={{ transform: isBlinking ? "scaleY(0.15)" : "scaleY(1)" }}
                 >
-                  <div className={`w-1 h-1 bg-foreground rounded-full ${isScared ? "animate-pulse" : ""}`}
-                       style={{ transform: isScared ? "scale(1.5)" : "scale(1)" }} />
+                  <div 
+                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-150"
+                    style={{ 
+                      left: `${2 + eyeOffset.x}px`, 
+                      top: `${2 + eyeOffset.y}px`,
+                      transform: isScared ? "scale(0.6)" : "scale(1)",
+                    }}
+                  >
+                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-80" />
+                  </div>
                 </div>
               </div>
-              {/* Cute mouth */}
-              <div 
-                className="absolute bottom-0.5 left-1/2 -translate-x-1/2 transition-all"
-                style={{
-                  width: isScared ? "4px" : "6px",
-                  height: isScared ? "4px" : "2px",
-                  backgroundColor: "var(--background)",
-                  borderRadius: isScared ? "50%" : "0 0 50% 50%",
-                }}
-              />
+              
+              {/* Eyebrows when scared */}
+              {isScared && (
+                <>
+                  <div className="absolute -top-0.5 left-1 w-2 h-0.5 bg-background rounded-full" 
+                       style={{ transform: "rotate(-20deg)" }} />
+                  <div className="absolute -top-0.5 right-1 w-2 h-0.5 bg-background rounded-full" 
+                       style={{ transform: "rotate(20deg)" }} />
+                </>
+              )}
+
+              {/* Mouth */}
+              <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2">
+                {isScared ? (
+                  <div className="w-2 h-2 bg-background rounded-full" />
+                ) : (
+                  <div className="w-2 h-1 bg-background/60 rounded-b-full" 
+                       style={{ animation: "mouth-smile 3s ease-in-out infinite" }} />
+                )}
+              </div>
+
+              {/* Fangs */}
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex gap-1">
+                <div className="w-0.5 h-1.5 bg-background/80 rounded-b-full" />
+                <div className="w-0.5 h-1.5 bg-background/80 rounded-b-full" />
+              </div>
             </div>
             
             {/* Body */}
-            <div className="w-8 h-7 bg-foreground rounded-full -mt-1 relative z-0">
-              {/* Body pattern */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-3 border-2 border-background/30 rounded-full" />
+            <div className="w-10 h-9 bg-foreground rounded-full -mt-2 relative z-0"
+                 style={{ 
+                   background: "radial-gradient(ellipse at 40% 30%, hsl(var(--foreground) / 0.7), hsl(var(--foreground)))" 
+                 }}>
+              {/* Body pattern - hourglass */}
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
+                <div className="w-2 h-1 bg-destructive/70 rounded-t-full" />
+                <div className="w-1 h-1 bg-destructive/70 rounded-full" />
+                <div className="w-2 h-1 bg-destructive/70 rounded-b-full" />
+              </div>
+              {/* Shine */}
+              <div className="absolute top-1 left-2 w-2 h-2 bg-background/10 rounded-full blur-sm" />
             </div>
+
+            {/* Little butt segment */}
+            <div className="w-4 h-2 bg-foreground rounded-b-full -mt-1 z-0" />
           </div>
         </div>
       </div>
 
       <style>{`
         @keyframes spider-swing {
-          0%, 100% { transform: rotate(-6deg) translateX(-2px); }
-          50% { transform: rotate(6deg) translateX(2px); }
+          0%, 100% { transform: rotate(-4deg) translateX(-3px); }
+          50% { transform: rotate(4deg) translateX(3px); }
         }
         @keyframes spider-shake {
-          0%, 100% { transform: translateX(-2px) rotate(-5deg); }
-          50% { transform: translateX(2px) rotate(5deg); }
+          0%, 100% { transform: translateX(-3px) rotate(-8deg); }
+          50% { transform: translateX(3px) rotate(8deg); }
         }
-        @keyframes leg-wave-1 {
-          0%, 100% { transform: rotate(-20deg); }
-          50% { transform: rotate(-35deg); }
+        @keyframes leg-crawl-1 {
+          0%, 100% { d: path('M30 8 Q20 5, 8 2'); }
+          50% { d: path('M30 8 Q22 3, 12 0'); }
         }
-        @keyframes leg-wave-2 {
-          0%, 100% { transform: rotate(0deg); }
-          50% { transform: rotate(-15deg); }
+        @keyframes leg-crawl-2 {
+          0%, 100% { d: path('M30 15 Q18 12, 4 10'); }
+          50% { d: path('M30 15 Q20 10, 8 6'); }
         }
-        @keyframes leg-wave-3 {
-          0%, 100% { transform: rotate(10deg); }
-          50% { transform: rotate(-5deg); }
+        @keyframes leg-crawl-3 {
+          0%, 100% { d: path('M30 22 Q18 22, 4 24'); }
+          50% { d: path('M30 22 Q20 24, 8 28'); }
         }
-        @keyframes leg-wave-4 {
-          0%, 100% { transform: rotate(25deg); }
-          50% { transform: rotate(10deg); }
+        @keyframes leg-crawl-4 {
+          0%, 100% { d: path('M30 29 Q20 32, 8 38'); }
+          50% { d: path('M30 29 Q22 34, 12 42'); }
+        }
+        @keyframes mouth-smile {
+          0%, 40%, 100% { transform: scaleX(1); }
+          50% { transform: scaleX(1.2); }
         }
       `}</style>
     </div>
