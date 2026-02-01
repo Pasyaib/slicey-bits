@@ -6,10 +6,12 @@ import Skills from "@/components/Skills";
 import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 import FloatingHelpButton from "@/components/FloatingHelpButton";
+import AnimatedSpider from "@/components/AnimatedSpider";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      <AnimatedSpider />
       <HeroSection />
       <SelectedWork />
       <Explorations />
