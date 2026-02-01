@@ -1,23 +1,24 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProjectCardProps {
   image: string;
   title: string;
   description: string;
   category: string;
-  link?: string;
+  slug: string;
 }
 
-const ProjectCard = ({ image, title, description, category, link = "#" }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, slug }: ProjectCardProps) => {
   return (
     <article className="group">
-      <div className="overflow-hidden mb-6">
+      <Link to={`/project/${slug}`} className="block overflow-hidden mb-6">
         <img
           src={image}
           alt={title}
           className="project-image group-hover:scale-105 transition-transform duration-500"
         />
-      </div>
+      </Link>
       
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-xl font-medium">{title}</h3>
@@ -28,10 +29,10 @@ const ProjectCard = ({ image, title, description, category, link = "#" }: Projec
         {description}
       </p>
       
-      <a href={link} className="btn-outline-portfolio">
+      <Link to={`/project/${slug}`} className="btn-outline-portfolio">
         View Live Demo
         <ArrowUpRight className="w-4 h-4" />
-      </a>
+      </Link>
     </article>
   );
 };
