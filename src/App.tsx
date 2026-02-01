@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
 import ExplorationDetail from "./pages/ExplorationDetail";
 import KineticPosterDetail from "./pages/KineticPosterDetail";
+import NeuralPatternsDetail from "./pages/NeuralPatternsDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/exploration/composition-series" element={<ExplorationDetail />} />
           <Route path="/exploration/kinetic-poster" element={<KineticPosterDetail />} />
+          <Route path="/exploration/neural-patterns" element={<NeuralPatternsDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
