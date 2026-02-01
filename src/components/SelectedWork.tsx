@@ -13,6 +13,7 @@ const projects = [
     description: "Window cleaning & pressure washing services landing page with modern UI design for South Florida market.",
     category: "WEB",
     slug: "godly",
+    externalLink: "https://godlywindows.com/",
   },
   {
     image: projectInact,
