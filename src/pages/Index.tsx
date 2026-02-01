@@ -6,6 +6,7 @@ import Skills from "@/components/Skills";
 import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
 import FloatingHelpButton from "@/components/FloatingHelpButton";
+import CatAnimation from "@/components/CatAnimation";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <Capabilities />
       <Footer />
       <FloatingHelpButton />
+      <CatAnimation />
     </main>
   );
 };
