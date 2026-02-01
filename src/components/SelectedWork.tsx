@@ -34,6 +34,7 @@ const projects = [
     description: "Payment registration flow for QRIS merchant onboarding with document verification and business data collection.",
     category: "APP",
     slug: "qris",
+    externalLink: "https://play.google.com/store/apps/details?id=com.interactive.qrisid&hl=id",
   },
   {
     image: projectTgv,
