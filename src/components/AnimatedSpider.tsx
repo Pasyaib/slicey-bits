@@ -159,241 +159,121 @@ const AnimatedSpider = () => {
             transformOrigin: "top center",
           }}
         >
-          <div className="relative flex flex-col items-center" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))" }}>
+          <div className="relative flex flex-col items-center">
             
-            {/* Left legs - improved with joints */}
-            <svg className="absolute -left-7 top-3 w-9 h-12" viewBox="0 0 36 48">
-              <path d="M34 8 Q26 4, 16 2 Q8 1, 2 4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-1 0.4s ease-in-out infinite" }} className="text-foreground" />
-              <path d="M34 16 Q24 12, 14 11 Q6 10, 0 14" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-2 0.4s ease-in-out infinite 0.1s" }} className="text-foreground" />
-              <path d="M34 24 Q24 24, 14 26 Q6 28, 0 34" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-3 0.4s ease-in-out infinite 0.2s" }} className="text-foreground" />
-              <path d="M34 32 Q26 36, 16 40 Q8 44, 2 48" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-4 0.4s ease-in-out infinite 0.3s" }} className="text-foreground" />
-            </svg>
-
-            {/* Right legs - improved with joints */}
-            <svg className="absolute -right-7 top-3 w-9 h-12" viewBox="0 0 36 48">
-              <path d="M2 8 Q10 4, 20 2 Q28 1, 34 4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-1 0.4s ease-in-out infinite 0.05s" }} className="text-foreground" />
-              <path d="M2 16 Q12 12, 22 11 Q30 10, 36 14" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-2 0.4s ease-in-out infinite 0.15s" }} className="text-foreground" />
-              <path d="M2 24 Q12 24, 22 26 Q30 28, 36 34" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-3 0.4s ease-in-out infinite 0.25s" }} className="text-foreground" />
-              <path d="M2 32 Q10 36, 20 40 Q28 44, 34 48" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-4 0.4s ease-in-out infinite 0.35s" }} className="text-foreground" />
-            </svg>
-
-            {/* Pedipalps (small front appendages) */}
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-4 z-20">
-              <div 
-                className="w-1 h-3 bg-foreground rounded-full origin-bottom"
-                style={{ 
-                  transform: "rotate(-25deg)",
-                  animation: "pedipalp-left 2s ease-in-out infinite"
-                }} 
-              />
-              <div 
-                className="w-1 h-3 bg-foreground rounded-full origin-bottom"
-                style={{ 
-                  transform: "rotate(25deg)",
-                  animation: "pedipalp-right 2s ease-in-out infinite 0.3s"
-                }} 
-              />
+            {/* Simple stick legs - left */}
+            <div className="absolute -left-5 top-2 flex flex-col gap-1">
+              {[0, 1, 2, 3].map((i) => (
+                <div 
+                  key={`left-${i}`}
+                  className="w-5 h-0.5 bg-foreground rounded-full origin-right"
+                  style={{ 
+                    transform: `rotate(${-30 + i * 20}deg)`,
+                    animation: `leg-wiggle 0.3s ease-in-out infinite ${i * 0.08}s`
+                  }}
+                />
+              ))}
             </div>
 
-            {/* Head */}
+            {/* Simple stick legs - right */}
+            <div className="absolute -right-5 top-2 flex flex-col gap-1">
+              {[0, 1, 2, 3].map((i) => (
+                <div 
+                  key={`right-${i}`}
+                  className="w-5 h-0.5 bg-foreground rounded-full origin-left"
+                  style={{ 
+                    transform: `rotate(${30 - i * 20}deg)`,
+                    animation: `leg-wiggle 0.3s ease-in-out infinite ${i * 0.08 + 0.04}s`
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Simple round body */}
             <div 
-              className="w-9 h-8 bg-foreground rounded-full relative z-10"
-              style={{ 
-                background: "radial-gradient(ellipse at 30% 30%, hsl(var(--foreground) / 0.7), hsl(var(--foreground)))",
-                animation: "spider-breathe 3s ease-in-out infinite"
-              }}
+              className="w-8 h-8 bg-foreground rounded-full relative z-10"
+              style={{ animation: "spider-bounce 2s ease-in-out infinite" }}
             >
-              {/* Big cute eyes */}
-              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex gap-1">
+              {/* HUGE googly eyes - the funny part */}
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 flex gap-0.5">
                 {/* Left eye */}
                 <div 
-                  className="w-3.5 h-3.5 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
-                  style={{ 
-                    transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)",
-                    boxShadow: "inset 0 2px 4px rgba(0,0,0,0.2)"
-                  }}
+                  className="w-5 h-5 bg-background rounded-full relative overflow-hidden border-2 border-foreground"
+                  style={{ transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)" }}
                 >
                   <div 
-                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-100"
+                    className="absolute w-3 h-3 bg-foreground rounded-full transition-all duration-75"
                     style={{ 
-                      left: `${3 + currentEyeOffset.x}px`, 
-                      top: `${3 + currentEyeOffset.y}px`,
-                      transform: isScared ? "scale(0.5)" : "scale(1)",
+                      left: `${4 + currentEyeOffset.x * 1.5}px`, 
+                      top: `${6 + currentEyeOffset.y * 2}px`,
+                      transform: isScared ? "scale(0.6)" : "scale(1)",
                     }}
-                  >
-                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-90" />
-                  </div>
+                  />
                 </div>
                 {/* Right eye */}
                 <div 
-                  className="w-3.5 h-3.5 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
-                  style={{ 
-                    transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)",
-                    boxShadow: "inset 0 2px 4px rgba(0,0,0,0.2)"
-                  }}
+                  className="w-5 h-5 bg-background rounded-full relative overflow-hidden border-2 border-foreground"
+                  style={{ transform: isBlinking ? "scaleY(0.1)" : "scaleY(1)" }}
                 >
                   <div 
-                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-100"
+                    className="absolute w-3 h-3 bg-foreground rounded-full transition-all duration-75"
                     style={{ 
-                      left: `${3 + currentEyeOffset.x}px`, 
-                      top: `${3 + currentEyeOffset.y}px`,
-                      transform: isScared ? "scale(0.5)" : "scale(1)",
+                      left: `${4 + currentEyeOffset.x * 1.5}px`, 
+                      top: `${6 + currentEyeOffset.y * 2}px`,
+                      transform: isScared ? "scale(0.6)" : "scale(1)",
                     }}
-                  >
-                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-90" />
-                  </div>
+                  />
                 </div>
               </div>
-              
-              {/* Eyebrows when scared */}
+
+              {/* Worried eyebrows when scared */}
               {isScared && (
-                <>
-                  <div className="absolute top-0 left-1.5 w-2.5 h-0.5 bg-background rounded-full origin-right" 
-                       style={{ transform: "rotate(-25deg)" }} />
-                  <div className="absolute top-0 right-1.5 w-2.5 h-0.5 bg-background rounded-full origin-left" 
-                       style={{ transform: "rotate(25deg)" }} />
-                </>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex gap-3">
+                  <div className="w-3 h-1 bg-foreground rounded-full" style={{ transform: "rotate(-20deg)" }} />
+                  <div className="w-3 h-1 bg-foreground rounded-full" style={{ transform: "rotate(20deg)" }} />
+                </div>
               )}
 
-              {/* Mouth */}
+              {/* Simple mouth */}
               <div className="absolute bottom-1 left-1/2 -translate-x-1/2">
                 {isScared ? (
-                  <div className="w-2.5 h-2.5 bg-background rounded-full flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-foreground/30 rounded-full" />
-                  </div>
+                  <div className="w-2 h-2 bg-background rounded-full" />
                 ) : (
-                  <div 
-                    className="w-3 h-1.5 bg-background/50 rounded-b-full" 
-                    style={{ animation: "mouth-smile 4s ease-in-out infinite" }} 
-                  />
+                  <div className="w-3 h-1 bg-background rounded-full" />
                 )}
-              </div>
-
-              {/* Chelicerae (fangs) */}
-              <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 flex gap-1.5">
-                <div 
-                  className="w-1 h-2 bg-background/90 rounded-b-full origin-top"
-                  style={{ animation: "fang-wiggle 3s ease-in-out infinite" }}
-                />
-                <div 
-                  className="w-1 h-2 bg-background/90 rounded-b-full origin-top"
-                  style={{ animation: "fang-wiggle 3s ease-in-out infinite 0.2s" }}
-                />
               </div>
             </div>
             
-            {/* Body with breathing animation */}
-            <div 
-              className="w-11 h-10 bg-foreground rounded-full -mt-2 relative z-0"
-              style={{ 
-                background: "radial-gradient(ellipse at 40% 30%, hsl(var(--foreground) / 0.6), hsl(var(--foreground)))",
-                animation: "spider-breathe 3s ease-in-out infinite 0.1s"
-              }}
-            >
-              {/* Body pattern - hourglass */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
-                <div className="w-2.5 h-1.5 bg-destructive/80 rounded-t-full" />
-                <div className="w-1.5 h-1 bg-destructive/80 rounded-full" />
-                <div className="w-2.5 h-1.5 bg-destructive/80 rounded-b-full" />
-              </div>
-              {/* Body shine */}
-              <div className="absolute top-1 left-2 w-3 h-3 bg-background/15 rounded-full blur-sm" />
-              <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-background/10 rounded-full" />
-            </div>
-
-            {/* Spinnerets (back segment) */}
-            <div className="flex flex-col items-center -mt-1 z-0">
-              <div 
-                className="w-5 h-3 bg-foreground rounded-b-full"
-                style={{ background: "radial-gradient(ellipse at 50% 0%, hsl(var(--foreground) / 0.8), hsl(var(--foreground)))" }}
-              />
-              <div className="flex gap-0.5 -mt-0.5">
-                <div className="w-0.5 h-1 bg-foreground/60 rounded-b-full" />
-                <div className="w-0.5 h-1.5 bg-foreground/60 rounded-b-full" />
-                <div className="w-0.5 h-1 bg-foreground/60 rounded-b-full" />
-              </div>
-            </div>
+            {/* Tiny butt */}
+            <div className="w-5 h-4 bg-foreground rounded-full -mt-2 z-0" />
           </div>
         </div>
       </div>
 
       <style>{`
         @keyframes spider-swing {
-          0%, 100% { transform: rotate(-4deg) translateX(-3px); }
-          50% { transform: rotate(4deg) translateX(3px); }
+          0%, 100% { transform: rotate(-6deg); }
+          50% { transform: rotate(6deg); }
         }
         @keyframes spider-shake {
-          0%, 100% { transform: translateX(-3px) rotate(-8deg); }
-          50% { transform: translateX(3px) rotate(8deg); }
+          0%, 100% { transform: translateX(-4px) rotate(-10deg); }
+          50% { transform: translateX(4px) rotate(10deg); }
         }
-        @keyframes spider-breathe {
+        @keyframes spider-bounce {
           0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.03); }
+          50% { transform: scale(1.08) translateY(-1px); }
         }
         @keyframes spider-flee-crawl {
-          0%, 100% { transform: rotate(-2deg) translateX(-1px); }
-          50% { transform: rotate(2deg) translateX(1px); }
+          0%, 100% { transform: rotate(-3deg); }
+          50% { transform: rotate(3deg); }
         }
         @keyframes web-shimmer {
           0%, 100% { transform: translateY(-100%); opacity: 0; }
           50% { transform: translateY(400%); opacity: 1; }
         }
-        @keyframes pedipalp-left {
-          0%, 100% { transform: rotate(-25deg); }
-          50% { transform: rotate(-35deg) translateY(-1px); }
-        }
-        @keyframes pedipalp-right {
-          0%, 100% { transform: rotate(25deg); }
-          50% { transform: rotate(35deg) translateY(-1px); }
-        }
-        @keyframes fang-wiggle {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-5deg); }
-          75% { transform: rotate(5deg); }
-        }
-        @keyframes leg-crawl-left-1 {
-          0%, 100% { d: path('M34 8 Q26 4, 16 2 Q8 1, 2 4'); }
-          50% { d: path('M34 8 Q28 2, 18 0 Q10 -1, 4 2'); }
-        }
-        @keyframes leg-crawl-left-2 {
-          0%, 100% { d: path('M34 16 Q24 12, 14 11 Q6 10, 0 14'); }
-          50% { d: path('M34 16 Q26 10, 16 8 Q8 7, 2 10'); }
-        }
-        @keyframes leg-crawl-left-3 {
-          0%, 100% { d: path('M34 24 Q24 24, 14 26 Q6 28, 0 34'); }
-          50% { d: path('M34 24 Q26 26, 16 30 Q8 34, 2 40'); }
-        }
-        @keyframes leg-crawl-left-4 {
-          0%, 100% { d: path('M34 32 Q26 36, 16 40 Q8 44, 2 48'); }
-          50% { d: path('M34 32 Q28 38, 18 44 Q10 50, 4 54'); }
-        }
-        @keyframes leg-crawl-right-1 {
-          0%, 100% { d: path('M2 8 Q10 4, 20 2 Q28 1, 34 4'); }
-          50% { d: path('M2 8 Q8 2, 18 0 Q26 -1, 32 2'); }
-        }
-        @keyframes leg-crawl-right-2 {
-          0%, 100% { d: path('M2 16 Q12 12, 22 11 Q30 10, 36 14'); }
-          50% { d: path('M2 16 Q10 10, 20 8 Q28 7, 34 10'); }
-        }
-        @keyframes leg-crawl-right-3 {
-          0%, 100% { d: path('M2 24 Q12 24, 22 26 Q30 28, 36 34'); }
-          50% { d: path('M2 24 Q10 26, 20 30 Q28 34, 34 40'); }
-        }
-        @keyframes leg-crawl-right-4 {
-          0%, 100% { d: path('M2 32 Q10 36, 20 40 Q28 44, 34 48'); }
-          50% { d: path('M2 32 Q8 38, 18 44 Q26 50, 32 54'); }
-        }
-        @keyframes mouth-smile {
-          0%, 40%, 100% { transform: scaleX(1); }
-          50% { transform: scaleX(1.2); }
+        @keyframes leg-wiggle {
+          0%, 100% { transform: rotate(var(--base-rotation, 0deg)); }
+          50% { transform: rotate(calc(var(--base-rotation, 0deg) + 8deg)); }
         }
       `}</style>
     </div>
