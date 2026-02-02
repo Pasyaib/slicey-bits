@@ -1,18 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const AnimatedSpider = () => {
   const [isDropped, setIsDropped] = useState(false);
   const [isScared, setIsScared] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
   const [isLookingAround, setIsLookingAround] = useState(false);
+  const [isFleeing, setIsFleeing] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [randomLook, setRandomLook] = useState({ x: 0, y: 0 });
+  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const dropTimer = setTimeout(() => setIsDropped(true), 1200);
     
     // Random blinking - sometimes double blink
     const blinkInterval = setInterval(() => {
+      if (isFleeing || isHidden) return;
       setIsBlinking(true);
       setTimeout(() => setIsBlinking(false), 100);
       // 30% chance of double blink
@@ -26,6 +30,7 @@ const AnimatedSpider = () => {
 
     // Random looking around when mouse isn't moving
     const lookInterval = setInterval(() => {
+      if (isFleeing || isHidden) return;
       if (Math.random() < 0.4) {
         setIsLookingAround(true);
         setRandomLook({
@@ -41,6 +46,7 @@ const AnimatedSpider = () => {
 
     // Eyes follow mouse
     const handleMouseMove = (e: MouseEvent) => {
+      if (isFleeing || isHidden) return;
       const x = Math.max(-2, Math.min(2, (e.clientX - window.innerWidth + 100) / 200));
       const y = Math.max(-1.5, Math.min(1.5, (e.clientY - 100) / 80));
       setEyeOffset({ x, y });
@@ -55,21 +61,68 @@ const AnimatedSpider = () => {
       clearInterval(lookInterval);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isFleeing, isHidden]);
 
   const handleSpiderClick = () => {
+    if (isFleeing || isHidden) return;
     setIsScared(true);
     setTimeout(() => setIsScared(false), 2500);
   };
 
+  const handleMouseEnter = () => {
+    if (isFleeing || isHidden) return;
+    // Start timer - if hovered for 2 seconds, spider flees
+    hoverTimerRef.current = setTimeout(() => {
+      setIsFleeing(true);
+      // After fleeing animation, hide completely
+      setTimeout(() => {
+        setIsHidden(true);
+        setIsFleeing(false);
+        // Come back after 5 seconds
+        setTimeout(() => {
+          setIsHidden(false);
+        }, 5000);
+      }, 800);
+    }, 2000);
+  };
+
+  const handleMouseLeave = () => {
+    // Cancel flee timer if mouse leaves before 2 seconds
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  };
+
   const currentEyeOffset = isLookingAround ? randomLook : eyeOffset;
+
+  // Calculate position based on state
+  const getSpiderTransform = () => {
+    if (isHidden) return "translateX(150px) translateY(-100px)";
+    if (isFleeing) return "translateX(120px) translateY(-80px) rotate(45deg)";
+    if (isScared) return "translateY(-180px)";
+    return "translateY(0)";
+  };
 
   return (
     <div className="fixed top-0 right-20 z-50 pointer-events-none">
       {/* Web thread with detail */}
-      <div className="relative mx-auto transition-all duration-1000 ease-out"
-           style={{ height: isDropped ? (isScared ? "40px" : "220px") : "0px" }}>
+      <div className="relative mx-auto transition-all duration-700 ease-out"
+           style={{ 
+             height: isDropped ? (isScared || isFleeing || isHidden ? "40px" : "220px") : "0px",
+             transform: isFleeing || isHidden ? "translateX(60px)" : "translateX(0)",
+           }}>
         <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-muted-foreground/50 to-muted-foreground/60 left-1/2 -translate-x-1/2" />
+        {/* Diagonal web line when fleeing */}
+        {(isFleeing || isHidden) && (
+          <div 
+            className="absolute top-0 left-1/2 w-px bg-gradient-to-br from-muted-foreground/60 to-transparent origin-top"
+            style={{ 
+              height: "150px",
+              transform: "rotate(45deg) translateX(-50%)",
+            }}
+          />
+        )}
         {/* Web shine - animated shimmer */}
         <div className="absolute inset-0 w-px left-1/2 -translate-x-1/2 ml-px overflow-hidden">
           <div 
@@ -83,18 +136,26 @@ const AnimatedSpider = () => {
       <div 
         className="pointer-events-auto cursor-pointer"
         onClick={handleSpiderClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{
-          opacity: isDropped ? 1 : 0,
-          transform: isScared ? "translateY(-180px)" : "translateY(0)",
-          transition: isScared 
-            ? "transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
-            : "transform 1s ease-out, opacity 0.5s",
+          opacity: isDropped ? (isHidden ? 0 : 1) : 0,
+          transform: getSpiderTransform(),
+          transition: isFleeing 
+            ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s"
+            : isScared 
+              ? "transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
+              : "transform 1s ease-out, opacity 0.5s",
         }}
       >
         <div 
           className="relative"
           style={{
-            animation: isScared ? "spider-shake 0.08s infinite" : "spider-swing 3s ease-in-out infinite",
+            animation: isFleeing 
+              ? "spider-flee-crawl 0.15s ease-in-out infinite" 
+              : isScared 
+                ? "spider-shake 0.08s infinite" 
+                : "spider-swing 3s ease-in-out infinite",
             transformOrigin: "top center",
           }}
         >
@@ -276,6 +337,10 @@ const AnimatedSpider = () => {
         @keyframes spider-breathe {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.03); }
+        }
+        @keyframes spider-flee-crawl {
+          0%, 100% { transform: rotate(-2deg) translateX(-1px); }
+          50% { transform: rotate(2deg) translateX(1px); }
         }
         @keyframes web-shimmer {
           0%, 100% { transform: translateY(-100%); opacity: 0; }
