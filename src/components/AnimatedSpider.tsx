@@ -2,23 +2,23 @@ import { useState, useEffect } from "react";
 
 const AnimatedSpider = () => {
   const [isDropped, setIsDropped] = useState(false);
-  const [isScared, setIsScared] = useState(false);
-  const [isBlinking, setIsBlinking] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isWaving, setIsWaving] = useState(false);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const dropTimer = setTimeout(() => setIsDropped(true), 1200);
+    const dropTimer = setTimeout(() => setIsDropped(true), 800);
     
-    // Random blinking
-    const blinkInterval = setInterval(() => {
-      setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), 120);
-    }, 2500 + Math.random() * 2000);
+    // Occasional wave
+    const waveInterval = setInterval(() => {
+      setIsWaving(true);
+      setTimeout(() => setIsWaving(false), 1200);
+    }, 8000);
 
-    // Eyes follow mouse slightly
+    // Eyes follow mouse
     const handleMouseMove = (e: MouseEvent) => {
-      const x = Math.max(-2, Math.min(2, (e.clientX - window.innerWidth + 100) / 200));
-      const y = Math.max(-1, Math.min(1, (e.clientY - 100) / 100));
+      const x = Math.max(-3, Math.min(3, (e.clientX - window.innerWidth + 100) / 150));
+      const y = Math.max(-2, Math.min(2, (e.clientY - 80) / 80));
       setEyeOffset({ x, y });
     };
 
@@ -26,205 +26,193 @@ const AnimatedSpider = () => {
 
     return () => {
       clearTimeout(dropTimer);
-      clearInterval(blinkInterval);
+      clearInterval(waveInterval);
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  const handleSpiderClick = () => {
-    setIsScared(true);
-    setTimeout(() => setIsScared(false), 2500);
-  };
-
   return (
-    <div className="fixed top-0 right-20 z-50 pointer-events-none">
-      {/* Web thread with detail */}
-      <div className="relative mx-auto transition-all duration-1000 ease-out"
-           style={{ height: isDropped ? (isScared ? "40px" : "220px") : "0px" }}>
-        <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-muted-foreground/50 to-muted-foreground/60 left-1/2 -translate-x-1/2" />
-        {/* Web shine */}
-        <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent left-1/2 -translate-x-1/2 ml-px" />
+    <div className="fixed top-0 right-16 z-50 pointer-events-none">
+      {/* Soft thread */}
+      <div 
+        className="relative mx-auto transition-all duration-[1200ms] ease-out"
+        style={{ 
+          height: isDropped ? (isHovered ? "60px" : "140px") : "0px",
+        }}
+      >
+        <div className="absolute inset-0 w-0.5 bg-gradient-to-b from-muted-foreground/20 via-muted-foreground/40 to-muted-foreground/50 left-1/2 -translate-x-1/2 rounded-full" />
       </div>
       
-      {/* Spider container */}
+      {/* Spider blob */}
       <div 
         className="pointer-events-auto cursor-pointer"
-        onClick={handleSpiderClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
           opacity: isDropped ? 1 : 0,
-          transform: isScared ? "translateY(-180px)" : "translateY(0)",
-          transition: isScared 
-            ? "transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
-            : "transform 1s ease-out, opacity 0.5s",
+          transform: isHovered ? "translateY(-80px) scale(1.1)" : "translateY(0) scale(1)",
+          transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease-out",
         }}
       >
         <div 
           className="relative"
           style={{
-            animation: isScared ? "spider-shake 0.08s infinite" : "spider-swing 3s ease-in-out infinite",
-            transformOrigin: "top center",
+            animation: isHovered ? "attio-bounce 0.6s ease-in-out infinite" : "attio-float 4s ease-in-out infinite",
+            transformOrigin: "center",
           }}
         >
-          <div className="relative flex flex-col items-center" style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.3))" }}>
+          {/* Glow effect */}
+          <div 
+            className="absolute -inset-4 rounded-full opacity-0 transition-opacity duration-300"
+            style={{ 
+              background: "radial-gradient(circle, hsl(var(--primary) / 0.15), transparent 70%)",
+              opacity: isHovered ? 0.8 : 0,
+            }} 
+          />
+
+          {/* Main body - soft blob shape */}
+          <div className="relative flex flex-col items-center">
             
-            {/* Left legs */}
-            <svg className="absolute -left-6 top-4 w-8 h-10" viewBox="0 0 32 40">
-              <path d="M30 8 Q22 5, 8 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-1 0.4s ease-in-out infinite" }} className="text-foreground" />
-              <path d="M30 15 Q20 12, 4 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-2 0.4s ease-in-out infinite 0.1s" }} className="text-foreground" />
-              <path d="M30 22 Q20 22, 4 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-3 0.4s ease-in-out infinite 0.2s" }} className="text-foreground" />
-              <path d="M30 29 Q22 32, 8 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-left-4 0.4s ease-in-out infinite 0.3s" }} className="text-foreground" />
-            </svg>
+            {/* Cute little legs - simplified soft style */}
+            <div className="absolute -left-4 top-6 flex flex-col gap-1.5">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={`left-${i}`}
+                  className="h-1 bg-foreground/80 rounded-full origin-right"
+                  style={{
+                    width: isWaving && i === 0 ? "18px" : "14px",
+                    transform: `rotate(${-15 + i * 15}deg)`,
+                    animation: isWaving && i === 0 
+                      ? "attio-wave 0.4s ease-in-out infinite" 
+                      : `attio-leg-wiggle 2s ease-in-out infinite ${i * 0.15}s`,
+                  }}
+                />
+              ))}
+            </div>
+            
+            <div className="absolute -right-4 top-6 flex flex-col gap-1.5">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={`right-${i}`}
+                  className="h-1 bg-foreground/80 rounded-full origin-left"
+                  style={{
+                    width: "14px",
+                    transform: `rotate(${15 - i * 15}deg)`,
+                    animation: `attio-leg-wiggle 2s ease-in-out infinite ${i * 0.15 + 0.1}s`,
+                  }}
+                />
+              ))}
+            </div>
 
-            {/* Right legs */}
-            <svg className="absolute -right-6 top-4 w-8 h-10" viewBox="0 0 32 40">
-              <path d="M2 8 Q10 5, 24 2" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-1 0.4s ease-in-out infinite 0.05s" }} className="text-foreground" />
-              <path d="M2 15 Q12 12, 28 10" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-2 0.4s ease-in-out infinite 0.15s" }} className="text-foreground" />
-              <path d="M2 22 Q12 22, 28 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-3 0.4s ease-in-out infinite 0.25s" }} className="text-foreground" />
-              <path d="M2 29 Q10 32, 24 38" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                    style={{ animation: "leg-crawl-right-4 0.4s ease-in-out infinite 0.35s" }} className="text-foreground" />
-            </svg>
-
-            {/* Head */}
-            <div className="w-8 h-7 bg-foreground rounded-full relative z-10"
-                 style={{ 
-                   background: "radial-gradient(ellipse at 30% 30%, hsl(var(--foreground) / 0.8), hsl(var(--foreground)))" 
-                 }}>
-              {/* Big cute eyes */}
-              <div className="absolute top-1 left-1/2 -translate-x-1/2 flex gap-0.5">
+            {/* Body blob */}
+            <div 
+              className="w-12 h-11 rounded-[50%] relative overflow-hidden"
+              style={{ 
+                background: "linear-gradient(145deg, hsl(var(--foreground) / 0.85), hsl(var(--foreground)))",
+                boxShadow: isHovered 
+                  ? "0 8px 24px -4px hsl(var(--foreground) / 0.3), inset 0 -2px 8px hsl(var(--background) / 0.1)"
+                  : "0 4px 12px -2px hsl(var(--foreground) / 0.2), inset 0 -2px 8px hsl(var(--background) / 0.1)",
+                transition: "box-shadow 0.3s ease",
+              }}
+            >
+              {/* Shine */}
+              <div 
+                className="absolute top-1.5 left-2 w-3 h-2 rounded-full"
+                style={{ background: "hsl(var(--background) / 0.25)" }}
+              />
+              
+              {/* Eyes container */}
+              <div className="absolute top-2.5 left-1/2 -translate-x-1/2 flex gap-1">
                 {/* Left eye */}
                 <div 
-                  className="w-3 h-3 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
-                  style={{ transform: isBlinking ? "scaleY(0.15)" : "scaleY(1)" }}
+                  className="w-4 h-4 bg-background rounded-full relative overflow-hidden transition-transform duration-200"
+                  style={{ 
+                    transform: isHovered ? "scale(1.15)" : "scale(1)",
+                    boxShadow: "inset 0 2px 4px hsl(var(--foreground) / 0.1)",
+                  }}
                 >
                   <div 
-                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-150"
+                    className="absolute w-2.5 h-2.5 bg-foreground rounded-full transition-all duration-100"
                     style={{ 
-                      left: `${2 + eyeOffset.x}px`, 
-                      top: `${2 + eyeOffset.y}px`,
-                      transform: isScared ? "scale(0.6)" : "scale(1)",
+                      left: `${4 + eyeOffset.x}px`, 
+                      top: `${4 + eyeOffset.y}px`,
                     }}
                   >
-                    {/* Eye shine */}
-                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-80" />
+                    <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-background rounded-full" />
                   </div>
                 </div>
                 {/* Right eye */}
                 <div 
-                  className="w-3 h-3 bg-background rounded-full relative overflow-hidden transition-transform duration-75"
-                  style={{ transform: isBlinking ? "scaleY(0.15)" : "scaleY(1)" }}
+                  className="w-4 h-4 bg-background rounded-full relative overflow-hidden transition-transform duration-200"
+                  style={{ 
+                    transform: isHovered ? "scale(1.15)" : "scale(1)",
+                    boxShadow: "inset 0 2px 4px hsl(var(--foreground) / 0.1)",
+                  }}
                 >
                   <div 
-                    className="absolute w-2 h-2 bg-foreground rounded-full transition-all duration-150"
+                    className="absolute w-2.5 h-2.5 bg-foreground rounded-full transition-all duration-100"
                     style={{ 
-                      left: `${2 + eyeOffset.x}px`, 
-                      top: `${2 + eyeOffset.y}px`,
-                      transform: isScared ? "scale(0.6)" : "scale(1)",
+                      left: `${4 + eyeOffset.x}px`, 
+                      top: `${4 + eyeOffset.y}px`,
                     }}
                   >
-                    <div className="absolute top-0 left-0.5 w-1 h-1 bg-background rounded-full opacity-80" />
+                    <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-background rounded-full" />
                   </div>
                 </div>
               </div>
-              
-              {/* Eyebrows when scared */}
-              {isScared && (
-                <>
-                  <div className="absolute -top-0.5 left-1 w-2 h-0.5 bg-background rounded-full" 
-                       style={{ transform: "rotate(-20deg)" }} />
-                  <div className="absolute -top-0.5 right-1 w-2 h-0.5 bg-background rounded-full" 
-                       style={{ transform: "rotate(20deg)" }} />
-                </>
-              )}
+
+              {/* Cheeks - appear on hover */}
+              <div 
+                className="absolute top-5 left-0.5 w-2 h-1.5 rounded-full transition-opacity duration-300"
+                style={{ 
+                  background: "hsl(var(--destructive) / 0.4)",
+                  opacity: isHovered ? 1 : 0,
+                }}
+              />
+              <div 
+                className="absolute top-5 right-0.5 w-2 h-1.5 rounded-full transition-opacity duration-300"
+                style={{ 
+                  background: "hsl(var(--destructive) / 0.4)",
+                  opacity: isHovered ? 1 : 0,
+                }}
+              />
 
               {/* Mouth */}
-              <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2">
-                {isScared ? (
-                  <div className="w-2 h-2 bg-background rounded-full" />
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                {isHovered ? (
+                  <div 
+                    className="w-3 h-2 bg-background/60 rounded-b-full"
+                    style={{ animation: "attio-smile 0.3s ease-out forwards" }}
+                  />
                 ) : (
-                  <div className="w-2 h-1 bg-background/60 rounded-b-full" 
-                       style={{ animation: "mouth-smile 3s ease-in-out infinite" }} />
+                  <div className="w-2 h-1 bg-background/40 rounded-full" />
                 )}
               </div>
-
-              {/* Fangs */}
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex gap-1">
-                <div className="w-0.5 h-1.5 bg-background/80 rounded-b-full" />
-                <div className="w-0.5 h-1.5 bg-background/80 rounded-b-full" />
-              </div>
             </div>
-            
-            {/* Body */}
-            <div className="w-10 h-9 bg-foreground rounded-full -mt-2 relative z-0"
-                 style={{ 
-                   background: "radial-gradient(ellipse at 40% 30%, hsl(var(--foreground) / 0.7), hsl(var(--foreground)))" 
-                 }}>
-              {/* Body pattern - hourglass */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
-                <div className="w-2 h-1 bg-destructive/70 rounded-t-full" />
-                <div className="w-1 h-1 bg-destructive/70 rounded-full" />
-                <div className="w-2 h-1 bg-destructive/70 rounded-b-full" />
-              </div>
-              {/* Shine */}
-              <div className="absolute top-1 left-2 w-2 h-2 bg-background/10 rounded-full blur-sm" />
-            </div>
-
-            {/* Little butt segment */}
-            <div className="w-4 h-2 bg-foreground rounded-b-full -mt-1 z-0" />
           </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes spider-swing {
-          0%, 100% { transform: rotate(-4deg) translateX(-3px); }
-          50% { transform: rotate(4deg) translateX(3px); }
+        @keyframes attio-float {
+          0%, 100% { transform: translateY(0) rotate(-2deg); }
+          50% { transform: translateY(-6px) rotate(2deg); }
         }
-        @keyframes spider-shake {
-          0%, 100% { transform: translateX(-3px) rotate(-8deg); }
-          50% { transform: translateX(3px) rotate(8deg); }
+        @keyframes attio-bounce {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-4px) scale(1.02); }
         }
-        @keyframes leg-crawl-left-1 {
-          0%, 100% { d: path('M30 8 Q22 5, 8 2'); }
-          50% { d: path('M30 8 Q24 3, 10 0'); }
+        @keyframes attio-leg-wiggle {
+          0%, 100% { transform: rotate(var(--base-rotate, 0deg)); }
+          50% { transform: rotate(calc(var(--base-rotate, 0deg) + 8deg)); }
         }
-        @keyframes leg-crawl-left-2 {
-          0%, 100% { d: path('M30 15 Q20 12, 4 10'); }
-          50% { d: path('M30 15 Q22 10, 6 6'); }
+        @keyframes attio-wave {
+          0%, 100% { transform: rotate(-45deg); }
+          50% { transform: rotate(-70deg); }
         }
-        @keyframes leg-crawl-left-3 {
-          0%, 100% { d: path('M30 22 Q20 22, 4 24'); }
-          50% { d: path('M30 22 Q22 24, 6 28'); }
-        }
-        @keyframes leg-crawl-left-4 {
-          0%, 100% { d: path('M30 29 Q22 32, 8 38'); }
-          50% { d: path('M30 29 Q24 34, 10 42'); }
-        }
-        @keyframes leg-crawl-right-1 {
-          0%, 100% { d: path('M2 8 Q10 5, 24 2'); }
-          50% { d: path('M2 8 Q8 3, 22 0'); }
-        }
-        @keyframes leg-crawl-right-2 {
-          0%, 100% { d: path('M2 15 Q12 12, 28 10'); }
-          50% { d: path('M2 15 Q10 10, 26 6'); }
-        }
-        @keyframes leg-crawl-right-3 {
-          0%, 100% { d: path('M2 22 Q12 22, 28 24'); }
-          50% { d: path('M2 22 Q10 24, 26 28'); }
-        }
-        @keyframes leg-crawl-right-4 {
-          0%, 100% { d: path('M2 29 Q10 32, 24 38'); }
-          50% { d: path('M2 29 Q8 34, 22 42'); }
-        }
-        @keyframes mouth-smile {
-          0%, 40%, 100% { transform: scaleX(1); }
-          50% { transform: scaleX(1.2); }
+        @keyframes attio-smile {
+          0% { transform: scaleY(0.5); }
+          100% { transform: scaleY(1); }
         }
       `}</style>
     </div>
