@@ -35,6 +35,14 @@ const Footer = () => {
         >
           Dribbble
         </a>
+        <a
+          href="https://layers.to/pasyaibrhm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
+        >
+          Layers
+        </a>
       </div>
     </footer>
   );
