@@ -1,4 +1,4 @@
-import { Mail, Instagram } from "lucide-react";
+import { Mail, Instagram, Dribbble } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -24,6 +24,12 @@ const HeroSection = () => {
             <a href="https://www.instagram.com/mediocre.works/" target="_blank" rel="noopener noreferrer">
               <Instagram className="w-4 h-4" />
               @mediocre.works
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="gap-2">
+            <a href="https://dribbble.com/Pasyaibrhm" target="_blank" rel="noopener noreferrer">
+              <Dribbble className="w-4 h-4" />
+              Dribbble
             </a>
           </Button>
         </div>
