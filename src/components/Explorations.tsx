@@ -12,6 +12,7 @@ import neuralPatterns1 from "@/assets/neural-patterns-1.png";
 import neuralPatterns2 from "@/assets/neural-patterns-2.png";
 import neuralPatterns3 from "@/assets/neural-patterns-3.png";
 import neuralPatterns4 from "@/assets/neural-patterns-4.png";
+import explorationCrypto from "@/assets/exploration-crypto.webp";
 
 const explorations = [
   {
@@ -31,6 +32,12 @@ const explorations = [
     category: "SYSTEM",
     title: "Satcom",
     slug: "neural-patterns",
+  },
+  {
+    images: [explorationCrypto],
+    category: "WEB",
+    title: "Crypto",
+    slug: "crypto",
   },
 ];
 
