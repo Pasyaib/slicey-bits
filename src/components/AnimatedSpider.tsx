@@ -1,6 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const SPIDER_MESSAGE = "Please hire this guy. He may not be an expert yet, but he is eager to learn. I've been observing him for the past two years. 👆";
+
+// Create typing sound using Web Audio API
+const createTypingSound = (audioContext: AudioContext) => {
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  // Typewriter-like click sound
+  oscillator.frequency.setValueAtTime(800 + Math.random() * 400, audioContext.currentTime);
+  oscillator.type = "square";
+  
+  gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);
+  
+  oscillator.start(audioContext.currentTime);
+  oscillator.stop(audioContext.currentTime + 0.05);
+};
 
 const AnimatedSpider = () => {
   const [isDropped, setIsDropped] = useState(false);
@@ -9,6 +28,15 @@ const AnimatedSpider = () => {
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  const playTypingSound = useCallback(() => {
+    // Skip sound for spaces and emojis
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    createTypingSound(audioContextRef.current);
+  }, []);
 
   useEffect(() => {
     const dropTimer = setTimeout(() => setIsDropped(true), 1200);
@@ -47,6 +75,13 @@ const AnimatedSpider = () => {
       const typingInterval = setInterval(() => {
         if (currentIndex <= SPIDER_MESSAGE.length) {
           setDisplayedText(SPIDER_MESSAGE.slice(0, currentIndex));
+          
+          // Play sound for non-space characters
+          const currentChar = SPIDER_MESSAGE[currentIndex - 1];
+          if (currentChar && currentChar !== ' ' && !currentChar.match(/[\u{1F000}-\u{1FFFF}]/u)) {
+            playTypingSound();
+          }
+          
           currentIndex++;
         } else {
           clearInterval(typingInterval);
@@ -58,7 +93,7 @@ const AnimatedSpider = () => {
     }, 800);
 
     return () => clearTimeout(startDelay);
-  }, [isDropped, isScared]);
+  }, [isDropped, isScared, playTypingSound]);
 
   // Reset text when scared
   useEffect(() => {
