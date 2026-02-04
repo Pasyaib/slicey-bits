@@ -1,4 +1,4 @@
-import { Mail, Instagram, Dribbble } from "lucide-react";
+import { Mail, Instagram, Dribbble, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -30,6 +30,12 @@ const HeroSection = () => {
             <a href="https://dribbble.com/Pasyaibrhm" target="_blank" rel="noopener noreferrer">
               <Dribbble className="w-4 h-4" />
               Dribbble
+            </a>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="gap-2">
+            <a href="https://layers.to/pasyaibrhm" target="_blank" rel="noopener noreferrer">
+              <Layers className="w-4 h-4" />
+              Layers
             </a>
           </Button>
         </div>
