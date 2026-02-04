@@ -16,8 +16,6 @@ import explorationCrypto from "@/assets/exploration-crypto.webp";
 import explorationCrypto2 from "@/assets/exploration-crypto-2.webp";
 import explorationCrypto3 from "@/assets/exploration-crypto-3.webp";
 import explorationCrypto4 from "@/assets/exploration-crypto-4.webp";
-import explorationCrypto5 from "@/assets/exploration-crypto-5.webp";
-import explorationCrypto6 from "@/assets/exploration-crypto-6.webp";
 
 const explorations = [
   {
@@ -39,7 +37,7 @@ const explorations = [
     slug: "neural-patterns",
   },
   {
-    images: [explorationCrypto, explorationCrypto2, explorationCrypto3, explorationCrypto4, explorationCrypto5, explorationCrypto6],
+    images: [explorationCrypto, explorationCrypto2, explorationCrypto3, explorationCrypto4],
     category: "WEB",
     title: "Crypto",
     slug: "crypto",
