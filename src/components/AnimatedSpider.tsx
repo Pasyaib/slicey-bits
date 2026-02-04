@@ -60,7 +60,7 @@ const AnimatedSpider = () => {
       >
         {/* Speech bubble */}
         <div 
-          className="absolute -left-32 top-2 bg-background border border-border rounded-lg px-3 py-2 shadow-lg"
+          className="absolute -left-64 top-0 bg-background border border-border rounded-lg px-3 py-2 shadow-lg w-56"
           style={{
             opacity: isScared ? 0 : 1,
             transform: isScared ? "scale(0.8)" : "scale(1)",
@@ -68,11 +68,11 @@ const AnimatedSpider = () => {
             animation: isDropped && !isScared ? "bubble-float 3s ease-in-out infinite" : "none",
           }}
         >
-          <span className="text-xs font-medium text-foreground whitespace-nowrap">
-            please hire this guy 👆
+          <span className="text-xs font-medium text-foreground leading-relaxed">
+            Please hire this guy. He may not be an expert yet, but he is eager to learn. I've been observing him for the past two years. 👆
           </span>
           {/* Speech bubble tail */}
-          <div className="absolute right-[-6px] top-3 w-3 h-3 bg-background border-r border-t border-border rotate-45" />
+          <div className="absolute right-[-6px] top-4 w-3 h-3 bg-background border-r border-t border-border rotate-45" />
         </div>
 
         <div 
