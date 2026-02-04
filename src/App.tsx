@@ -8,6 +8,7 @@ import ProjectDetail from "./pages/ProjectDetail";
 import ExplorationDetail from "./pages/ExplorationDetail";
 import KineticPosterDetail from "./pages/KineticPosterDetail";
 import NeuralPatternsDetail from "./pages/NeuralPatternsDetail";
+import CryptoDetail from "./pages/CryptoDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/exploration/composition-series" element={<ExplorationDetail />} />
           <Route path="/exploration/kinetic-poster" element={<KineticPosterDetail />} />
           <Route path="/exploration/neural-patterns" element={<NeuralPatternsDetail />} />
+          <Route path="/exploration/crypto" element={<CryptoDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
