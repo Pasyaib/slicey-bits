@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 
+const SPIDER_MESSAGE = "Please hire this guy. He may not be an expert yet, but he is eager to learn. I've been observing him for the past two years. 👆";
+
 const AnimatedSpider = () => {
   const [isDropped, setIsDropped] = useState(false);
   const [isScared, setIsScared] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     const dropTimer = setTimeout(() => setIsDropped(true), 1200);
@@ -30,6 +34,38 @@ const AnimatedSpider = () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
+
+  // Typing animation effect
+  useEffect(() => {
+    if (!isDropped || isScared) return;
+    
+    // Start typing after spider drops
+    const startDelay = setTimeout(() => {
+      setIsTyping(true);
+      let currentIndex = 0;
+      
+      const typingInterval = setInterval(() => {
+        if (currentIndex <= SPIDER_MESSAGE.length) {
+          setDisplayedText(SPIDER_MESSAGE.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setIsTyping(false);
+        }
+      }, 35);
+
+      return () => clearInterval(typingInterval);
+    }, 800);
+
+    return () => clearTimeout(startDelay);
+  }, [isDropped, isScared]);
+
+  // Reset text when scared
+  useEffect(() => {
+    if (isScared) {
+      setDisplayedText("");
+    }
+  }, [isScared]);
 
   const handleSpiderClick = () => {
     setIsScared(true);
@@ -62,14 +98,15 @@ const AnimatedSpider = () => {
         <div 
           className="absolute -left-64 top-0 bg-background border border-border rounded-lg px-3 py-2 shadow-lg w-56"
           style={{
-            opacity: isScared ? 0 : 1,
+            opacity: isScared || displayedText.length === 0 ? 0 : 1,
             transform: isScared ? "scale(0.8)" : "scale(1)",
             transition: "opacity 0.2s, transform 0.2s",
-            animation: isDropped && !isScared ? "bubble-float 3s ease-in-out infinite" : "none",
+            animation: isDropped && !isScared && !isTyping ? "bubble-float 3s ease-in-out infinite" : "none",
           }}
         >
           <span className="text-xs font-medium text-foreground leading-relaxed">
-            Please hire this guy. He may not be an expert yet, but he is eager to learn. I've been observing him for the past two years. 👆
+            {displayedText}
+            {isTyping && <span className="inline-block w-0.5 h-3 bg-foreground ml-0.5 animate-pulse" />}
           </span>
           {/* Speech bubble tail */}
           <div className="absolute right-[-6px] top-4 w-3 h-3 bg-background border-r border-t border-border rotate-45" />
