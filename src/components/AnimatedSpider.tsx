@@ -58,6 +58,23 @@ const AnimatedSpider = () => {
             : "transform 1s ease-out, opacity 0.5s",
         }}
       >
+        {/* Speech bubble */}
+        <div 
+          className="absolute -left-32 top-2 bg-background border border-border rounded-lg px-3 py-2 shadow-lg"
+          style={{
+            opacity: isScared ? 0 : 1,
+            transform: isScared ? "scale(0.8)" : "scale(1)",
+            transition: "opacity 0.2s, transform 0.2s",
+            animation: isDropped && !isScared ? "bubble-float 3s ease-in-out infinite" : "none",
+          }}
+        >
+          <span className="text-xs font-medium text-foreground whitespace-nowrap">
+            please hire this guy 👆
+          </span>
+          {/* Speech bubble tail */}
+          <div className="absolute right-[-6px] top-3 w-3 h-3 bg-background border-r border-t border-border rotate-45" />
+        </div>
+
         <div 
           className="relative"
           style={{
@@ -225,6 +242,10 @@ const AnimatedSpider = () => {
         @keyframes mouth-smile {
           0%, 40%, 100% { transform: scaleX(1); }
           50% { transform: scaleX(1.2); }
+        }
+        @keyframes bubble-float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
         }
       `}</style>
     </div>
