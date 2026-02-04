@@ -27,6 +27,14 @@ const Footer = () => {
         >
           LinkedIn
         </a>
+        <a
+          href="https://dribbble.com/Pasyaibrhm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
+        >
+          Dribbble
+        </a>
       </div>
     </footer>
   );
