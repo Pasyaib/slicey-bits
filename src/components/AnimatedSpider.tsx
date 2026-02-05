@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const SPIDER_MESSAGE = "Please hire this guy. He may not be an expert yet, but he is eager to learn. I've been observing him for the past two years. 👆";
 
@@ -22,6 +23,7 @@ const createTypingSound = (audioContext: AudioContext) => {
 };
 
 const AnimatedSpider = () => {
+  const isMobile = useIsMobile();
   const [isDropped, setIsDropped] = useState(false);
   const [isScared, setIsScared] = useState(false);
   const [isBlinking, setIsBlinking] = useState(false);
@@ -101,6 +103,11 @@ const AnimatedSpider = () => {
       setDisplayedText("");
     }
   }, [isScared]);
+
+  // Don't render on mobile
+  if (isMobile) {
+    return null;
+  }
 
   const handleSpiderClick = () => {
     setIsScared(true);
