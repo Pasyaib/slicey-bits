@@ -109,9 +109,9 @@ const AnimatedSpider = () => {
     setTimeout(() => setIsScared(false), 2500);
   };
 
-  const scale = isMobile ? 0.6 : 1;
-  const dropDistance = isMobile ? "140px" : "220px";
-  const rightPosition = isMobile ? "right-4" : "right-20";
+  const scale = isMobile === true ? 0.6 : 1;
+  const dropDistance = isMobile === true ? "140px" : "220px";
+  const rightPosition = isMobile === true ? "right-4" : "right-20";
 
   return (
     <div className={`fixed top-0 ${rightPosition} z-50 pointer-events-none`}>
