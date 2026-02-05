@@ -5,7 +5,7 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import Capabilities from "@/components/Capabilities";
 import Footer from "@/components/Footer";
-import FloatingHelpButton from "@/components/FloatingHelpButton";
+
 import AnimatedSpider from "@/components/AnimatedSpider";
 
 const Index = () => {
@@ -19,7 +19,7 @@ const Index = () => {
       <Skills />
       <Capabilities />
       <Footer />
-      <FloatingHelpButton />
+
     </main>
   );
 };
