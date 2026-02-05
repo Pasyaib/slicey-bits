@@ -104,20 +104,21 @@ const AnimatedSpider = () => {
     }
   }, [isScared]);
 
+  // Don't render on mobile
+  if (isMobile) {
+    return null;
+  }
+
   const handleSpiderClick = () => {
     setIsScared(true);
     setTimeout(() => setIsScared(false), 2500);
   };
 
-  const scale = isMobile === true ? 0.6 : 1;
-  const dropDistance = isMobile === true ? "140px" : "220px";
-  const rightPosition = isMobile === true ? "right-4" : "right-20";
-
   return (
-    <div className={`fixed top-0 ${rightPosition} z-50 pointer-events-none`}>
+    <div className="fixed top-0 right-20 z-50 pointer-events-none">
       {/* Web thread with detail */}
       <div className="relative mx-auto transition-all duration-1000 ease-out"
-           style={{ height: isDropped ? (isScared ? "40px" : dropDistance) : "0px" }}>
+           style={{ height: isDropped ? (isScared ? "40px" : "220px") : "0px" }}>
         <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-muted-foreground/50 to-muted-foreground/60 left-1/2 -translate-x-1/2" />
         {/* Web shine */}
         <div className="absolute inset-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent left-1/2 -translate-x-1/2 ml-px" />
@@ -129,8 +130,7 @@ const AnimatedSpider = () => {
         onClick={handleSpiderClick}
         style={{
           opacity: isDropped ? 1 : 0,
-          transform: `scale(${scale}) ${isScared ? "translateY(-180px)" : "translateY(0)"}`,
-          transformOrigin: "top center",
+          transform: isScared ? "translateY(-180px)" : "translateY(0)",
           transition: isScared 
             ? "transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)" 
             : "transform 1s ease-out, opacity 0.5s",
@@ -138,7 +138,7 @@ const AnimatedSpider = () => {
       >
         {/* Speech bubble */}
         <div 
-          className={`absolute ${isMobile ? "-left-44 w-40" : "-left-64 w-56"} top-0 bg-background border border-border rounded-lg px-3 py-2 shadow-lg`}
+          className="absolute -left-64 top-0 bg-background border border-border rounded-lg px-3 py-2 shadow-lg w-56"
           style={{
             opacity: isScared || displayedText.length === 0 ? 0 : 1,
             transform: isScared ? "scale(0.8)" : "scale(1)",
