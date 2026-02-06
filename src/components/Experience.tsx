@@ -20,6 +20,7 @@ const experiences = [
     period: "Mei 2024 — Juni 2024",
     location: "San Florida",
     description: "Designed company profile.",
+    link: "https://www.trynomad.co/",
   },
   {
     company: "Godly",
@@ -72,9 +73,9 @@ const Experience = () => {
 
       <Accordion type="single" collapsible className="w-full">
         {experiences.map((exp, index) => (
-          <AccordionItem 
-            key={index} 
-            value={`item-${index}`} 
+          <AccordionItem
+            key={index}
+            value={`item-${index}`}
             className="border-b border-border py-2 group"
           >
             <AccordionTrigger className="py-6 hover:no-underline [&[data-state=open]>div>.company-name]:text-foreground">
@@ -83,24 +84,37 @@ const Experience = () => {
                 <span className="text-xs text-muted-foreground font-mono md:w-12 shrink-0">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                
+
                 {/* Company */}
-                <h3 className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors group-hover:text-muted-foreground">
-                  {exp.company}
-                </h3>
-                
+                {/* @ts-ignore */}
+                {exp.link ? (
+                  <a
+                    href={exp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors hover:text-foreground group-hover:text-muted-foreground underline decoration-1 underline-offset-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {exp.company} ↗
+                  </a>
+                ) : (
+                  <h3 className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors group-hover:text-muted-foreground">
+                    {exp.company}
+                  </h3>
+                )}
+
                 {/* Role - Hidden on mobile, shown in content */}
                 <p className="hidden md:block text-sm text-muted-foreground md:w-48 shrink-0">
                   {exp.role}
                 </p>
-                
+
                 {/* Period */}
                 <p className="text-xs md:text-sm text-muted-foreground md:w-40 shrink-0 md:text-right font-mono">
                   {exp.period}
                 </p>
               </div>
             </AccordionTrigger>
-            
+
             <AccordionContent className="overflow-hidden">
               <div className="pb-6 pt-2 pl-0 md:pl-12">
                 <div className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12">
@@ -115,7 +129,7 @@ const Experience = () => {
                       <p className="text-sm font-medium mt-1">{exp.location}</p>
                     </div>
                   </div>
-                  
+
                   {/* Description */}
                   <div>
                     <span className="text-xs text-muted-foreground uppercase tracking-wider">Overview</span>
