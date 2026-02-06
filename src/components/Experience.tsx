@@ -28,6 +28,7 @@ const experiences = [
     period: "Mei 2024 — Juni 2024",
     location: "San Florida",
     description: "Designed company profile.",
+    link: "https://godlywindows.com/",
   },
   {
     company: "Direction Excellence TGV-INTERCITÉS SNCF",
