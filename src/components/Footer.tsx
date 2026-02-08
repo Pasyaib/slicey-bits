@@ -1,3 +1,5 @@
+import DinoGame from "./DinoGame";
+
 const Footer = () => {
   return (
     <footer className="container-portfolio py-24 md:py-32">
@@ -8,7 +10,7 @@ const Footer = () => {
 
       {/* Large Headline */}
       <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight mb-16 max-w-4xl">
-        Let's build something meaningless together.
+        Let's build something meaningful together.
       </h2>
 
       {/* Links */}
@@ -43,6 +45,13 @@ const Footer = () => {
         >
           Layers
         </a>
+      </div>
+
+      <div className="mt-24 border-t border-border pt-12 text-center">
+        <p className="text-sm md:text-base text-muted-foreground mb-4 font-mono">
+          If you're not interested in me, at least please play with my cat.
+        </p>
+        <DinoGame />
       </div>
     </footer>
   );
