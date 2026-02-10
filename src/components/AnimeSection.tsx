@@ -78,10 +78,10 @@ const AnimeSection = () => {
             <audio ref={audioRef} src="https://unaware-orange-cvziiyx6ui.edgeone.app/youseebiggirl.mp3" preload="auto" />
 
             <div className="mb-12 flex items-baseline justify-between">
-                <div className="flex justify-between items-baseline w-full">
-                    <h3 className="text-2xl font-light">Personal Watchlist · Based on Taste</h3>
-                    <span className="text-sm text-muted-foreground">(04.5) — WATCHLIST</span>
-                </div>
+                <h3 className="text-2xl md:text-3xl font-medium tracking-tight">
+                    Visual Diet
+                </h3>
+                <span className="text-muted-foreground font-mono text-sm">(04.5) — WATCHLIST</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
