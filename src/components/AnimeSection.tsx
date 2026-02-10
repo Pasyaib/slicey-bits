@@ -47,7 +47,7 @@ const AnimeSection = () => {
             genre: "Dark Fantasy",
             status: "Ongoing",
             image: "https://ik.imagekit.io/jma7wkem8/7b64b61c2b59ab3cf35de7ee65fd6b87.jpg",
-            sound: "https://uncertain-gold-fnudhp7kqm.edgeone.app/Berserk%20Orchestra%20Cover.mp3"
+            sound: "https://allied-fuchsia-aie65yyqff.edgeone.app/Berserk%20OST%20BLOOD%20AND%20GUTS%20and%20GUTS%20and%20BLOOD%20Cover.mp3"
         },
         {
             title: "Attack on Titan",
