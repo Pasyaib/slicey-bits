@@ -51,7 +51,7 @@ const AnimeSection = () => {
             genre: "Dark Fantasy",
             status: "Completed",
             image: "https://ik.imagekit.io/jma7wkem8/ef16826f29a5ca88c8421b85f2e6af6b.jpg",
-            sound: "/audio/youseebiggirl.mp3" // Local file path
+            sound: "https://unaware-orange-cvziiyx6ui.edgeone.app/youseebiggirl.mp3"
         },
         {
             title: "One Piece",
@@ -67,8 +67,8 @@ const AnimeSection = () => {
 
     return (
         <section className="container-portfolio py-24 border-t border-border">
-            {/* Hidden Audio Element - Expects file at public/audio/youseebiggirl.mp3 */}
-            <audio ref={audioRef} src="/audio/youseebiggirl.mp3" preload="auto" />
+            {/* Audio Element - CDN hosted for production */}
+            <audio ref={audioRef} src="https://unaware-orange-cvziiyx6ui.edgeone.app/youseebiggirl.mp3" preload="auto" />
 
             <div className="mb-12 flex items-baseline justify-between">
                 <h3 className="text-2xl md:text-3xl font-medium tracking-tight">
