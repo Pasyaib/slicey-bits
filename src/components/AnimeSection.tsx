@@ -1,13 +1,35 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const AnimeSection = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [audioEnabled, setAudioEnabled] = useState(false);
+
+    // Enable audio on first user interaction
+    useEffect(() => {
+        const enableAudio = () => {
+            setAudioEnabled(true);
+            console.log("Audio enabled after user interaction");
+        };
+
+        // Listen for any user interaction
+        document.addEventListener('click', enableAudio, { once: true });
+        document.addEventListener('keydown', enableAudio, { once: true });
+
+        return () => {
+            document.removeEventListener('click', enableAudio);
+            document.removeEventListener('keydown', enableAudio);
+        };
+    }, []);
 
     const playSound = () => {
-        if (audioRef.current) {
+        if (audioRef.current && audioEnabled) {
             audioRef.current.currentTime = 0;
             audioRef.current.volume = 0.5;
-            audioRef.current.play().catch(e => console.log("Audio play failed (interaction needed first)", e));
+            audioRef.current.play()
+                .then(() => console.log("Audio playing successfully"))
+                .catch(e => console.log("Audio play failed:", e));
+        } else if (!audioEnabled) {
+            console.log("Audio not enabled yet - click anywhere on the page first");
         }
     };
 

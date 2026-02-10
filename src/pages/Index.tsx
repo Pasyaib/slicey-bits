@@ -19,7 +19,6 @@ const Index = () => {
       <Experience />
       <Skills />
       <Capabilities />
-      <Capabilities />
       <AnimeSection />
       <Footer />
 
