@@ -21,12 +21,13 @@ const AnimeSection = () => {
         };
     }, []);
 
-    const playSound = () => {
-        if (audioRef.current && audioEnabled) {
+    const playSound = (soundUrl: string) => {
+        if (audioRef.current && audioEnabled && soundUrl) {
+            audioRef.current.src = soundUrl;
             audioRef.current.currentTime = 0;
             audioRef.current.volume = 0.5;
             audioRef.current.play()
-                .then(() => console.log("Audio playing successfully"))
+                .then(() => console.log("Audio playing successfully:", soundUrl))
                 .catch(e => console.log("Audio play failed:", e));
         } else if (!audioEnabled) {
             console.log("Audio not enabled yet - click anywhere on the page first");
@@ -42,9 +43,11 @@ const AnimeSection = () => {
 
     const animes = [
         {
-            title: "Naruto",
-            genre: "Shonen",
-            status: "Completed",
+            title: "Berserk",
+            genre: "Dark Fantasy",
+            status: "Ongoing",
+            image: "https://ik.imagekit.io/jma7wkem8/7b64b61c2b59ab3cf35de7ee65fd6b87.jpg",
+            sound: "https://uncertain-gold-fnudhp7kqm.edgeone.app/Berserk%20Orchestra%20Cover.mp3"
         },
         {
             title: "Attack on Titan",
@@ -54,14 +57,18 @@ const AnimeSection = () => {
             sound: "https://unaware-orange-cvziiyx6ui.edgeone.app/youseebiggirl.mp3"
         },
         {
-            title: "One Piece",
-            genre: "Adventure",
+            title: "Kimetsu no Yaiba",
+            genre: "Dark Fantasy",
             status: "Ongoing",
+            image: "https://ik.imagekit.io/jma7wkem8/a5a42a7b49234de25a238e6be9f945a4.jpg",
+            sound: "https://female-teal-bgriw7aj2w.edgeone.app/To_the_Infinity_Castle_-_Muzan_vs_Hashira_Theme_from_Demon_Slayer_128kbps_._(mp3.pm).mp3"
         },
         {
             title: "Fullmetal Alchemist",
             genre: "Steampunk",
             status: "Completed",
+            image: "https://ik.imagekit.io/jma7wkem8/70db1e8f1cc672390253e4b123af7c79.jpg",
+            sound: "https://soft-blue-rils6diaf4.edgeone.app/Fullmetal%20Alchemist%20Brotherhood%20Opening%201%20-%20Again_tv.mp3"
         },
     ];
 
@@ -81,34 +88,34 @@ const AnimeSection = () => {
                 {animes.map((anime, index) => (
                     <div
                         key={index}
-                        className="group p-6 border border-border bg-card/30 hover:bg-card transition-all duration-300 flex flex-col justify-between aspect-[3/4] relative overflow-hidden"
+                        className="group p-6 border border-border bg-card/30 hover:bg-card hover:border-foreground/20 hover:shadow-lg hover:shadow-foreground/5 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-500 ease-out flex flex-col justify-between aspect-[3/4] relative overflow-hidden cursor-pointer"
                         style={anime.image ? {
                             backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url(${anime.image})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center'
                         } : {}}
                         onMouseEnter={() => {
-                            if (anime.title === "Attack on Titan") playSound();
+                            if (anime.sound) playSound(anime.sound);
                         }}
                         onMouseLeave={() => {
-                            if (anime.title === "Attack on Titan") stopSound();
+                            if (anime.sound) stopSound();
                         }}
                     >
                         <div className="z-10 relative">
-                            <span className={`text-xs font-mono mb-2 block ${anime.image ? 'text-white/80' : 'text-muted-foreground'}`}>
+                            <span className={`text-xs font-mono mb-2 block transition-all duration-300 ${anime.image ? 'text-white/80 group-hover:text-white' : 'text-muted-foreground group-hover:text-foreground'}`}>
                                 0{index + 1}
                             </span>
-                            <h4 className={`text-xl font-medium leading-tight group-hover:underline underline-offset-4 decoration-1 ${anime.image ? 'text-white' : ''}`}>
+                            <h4 className={`text-xl font-medium leading-tight group-hover:underline underline-offset-4 decoration-1 transition-all duration-300 ${anime.image ? 'text-white' : 'group-hover:translate-x-1'}`}>
                                 {anime.title}
                             </h4>
                         </div>
 
                         <div className="z-10 relative mt-auto pt-8">
-                            <div className={`flex justify-between items-end border-t pt-4 ${anime.image ? 'border-white/20' : 'border-border/50'}`}>
-                                <span className={`text-xs font-mono uppercase tracking-wider ${anime.image ? 'text-white/70' : 'text-muted-foreground'}`}>
+                            <div className={`flex justify-between items-end border-t pt-4 transition-all duration-300 ${anime.image ? 'border-white/20 group-hover:border-white/40' : 'border-border/50 group-hover:border-border'}`}>
+                                <span className={`text-xs font-mono uppercase tracking-wider transition-all duration-300 ${anime.image ? 'text-white/70 group-hover:text-white/90' : 'text-muted-foreground group-hover:text-foreground'}`}>
                                     {anime.genre}
                                 </span>
-                                <span className={`text-xs font-mono ${anime.image ? 'text-white/70' : 'text-muted-foreground'}`}>
+                                <span className={`text-xs font-mono transition-all duration-300 ${anime.image ? 'text-white/70 group-hover:text-white/90' : 'text-muted-foreground group-hover:text-foreground'}`}>
                                     [{anime.status === 'Ongoing' ? 'ON' : 'END'}]
                                 </span>
                             </div>
@@ -117,6 +124,11 @@ const AnimeSection = () => {
                         {/* Decorative minimal background element on hover (only for non-image cards) */}
                         {!anime.image && (
                             <div className="absolute top-0 right-0 w-24 h-24 bg-foreground/5 rounded-bl-full translate-x-12 -translate-y-12 group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-500 opacity-0 group-hover:opacity-100" />
+                        )}
+
+                        {/* Subtle overlay effect for image cards */}
+                        {anime.image && (
+                            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/0 group-hover:to-white/5 transition-all duration-500" />
                         )}
                     </div>
                 ))}
