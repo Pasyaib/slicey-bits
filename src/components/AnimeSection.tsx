@@ -88,7 +88,7 @@ const AnimeSection = () => {
             title: "Jujutsu Kaisen",
             genre: "Dark Fantasy",
             status: "Ongoing",
-            image: "https://ik.imagekit.io/jma7wkem8/89bfba9409d359396afbff6cc494d88e%20%281%29.jpg",
+            image: "https://ik.imagekit.io/jma7wkem8/26e62315b063e3cde8b913f1a9591213.jpg",
             sound: "https://hushed-apricot-alpnk6vza2.edgeone.app/King_Gnu_-_SPECIALZ_(mp3.pm).mp3"
         },
     ];
