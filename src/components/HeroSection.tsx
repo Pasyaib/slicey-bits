@@ -1,4 +1,4 @@
-import { Mail, Instagram, Dribbble, Layers } from "lucide-react";
+import { MessageCircle, Instagram, Dribbble, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -15,8 +15,8 @@ const HeroSection = () => {
         </p>
         <div className="flex flex-wrap gap-3">
           <Button asChild size="lg" className="gap-2">
-            <a href="mailto:pasyaibrhm@gmail.com">
-              <Mail className="w-4 h-4" />
+            <a href="https://wa.me/6285730941680" target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-4 h-4" />
               Get in Touch
             </a>
           </Button>
