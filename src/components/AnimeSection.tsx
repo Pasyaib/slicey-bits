@@ -70,12 +70,33 @@ const AnimeSection = () => {
             image: "https://ik.imagekit.io/jma7wkem8/70db1e8f1cc672390253e4b123af7c79.jpg",
             sound: "https://soft-blue-rils6diaf4.edgeone.app/Fullmetal%20Alchemist%20Brotherhood%20Opening%201%20-%20Again_tv.mp3"
         },
+        {
+            title: "Vinland Saga",
+            genre: "Historical",
+            status: "Ongoing",
+            image: "https://ik.imagekit.io/jma7wkem8/b4bb65236a0db3fde6201babf0859d52.jpg",
+            sound: "https://hungry-ivory-vj7kngiuz6.edgeone.app/Vinland_Saga_Ost_-_STILL_BLADE_(mp3.pm).mp3"
+        },
+        {
+            title: "One Piece",
+            genre: "Adventure",
+            status: "Ongoing",
+            image: "https://ik.imagekit.io/jma7wkem8/download.png",
+            sound: "https://huge-violet-8pkyuj4xbh.edgeone.app/One%20Piece%20Ending%201%20-%20Memories_default.mp3"
+        },
+        {
+            title: "Jujutsu Kaisen",
+            genre: "Dark Fantasy",
+            status: "Ongoing",
+            image: "https://ik.imagekit.io/jma7wkem8/89bfba9409d359396afbff6cc494d88e%20(1).jpg",
+            sound: "https://hushed-apricot-alpnk6vza2.edgeone.app/King_Gnu_-_SPECIALZ_(mp3.pm).mp3"
+        },
     ];
 
     return (
         <section className="container-portfolio py-24 border-t border-border">
-            {/* Audio Element - CDN hosted for production */}
-            <audio ref={audioRef} src="https://unaware-orange-cvziiyx6ui.edgeone.app/youseebiggirl.mp3" preload="auto" />
+            {/* Audio Element - dynamically loads sound on hover */}
+            <audio ref={audioRef} preload="auto" />
 
             <div className="mb-12 flex items-baseline justify-between">
                 <h3 className="text-2xl md:text-3xl font-medium tracking-tight">
