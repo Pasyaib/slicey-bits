@@ -12,6 +12,7 @@ interface ProjectCardProps {
   category: string;
   externalLink?: string;
   status?: string;
+  ctaLabel?: string;
 }
 
 const ProjectCard = ({ image, title, description, category, externalLink, status, ctaLabel = "View Live" }: ProjectCardProps) => {
