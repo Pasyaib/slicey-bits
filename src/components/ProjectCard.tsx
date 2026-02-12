@@ -54,7 +54,7 @@ const ProjectCard = ({ image, title, description, category, externalLink, status
           rel="noopener noreferrer"
           className="btn-outline-portfolio"
         >
-          View Live
+          {ctaLabel}
           <ArrowUpRight className="w-4 h-4" />
         </a>
       ) : status ? (
