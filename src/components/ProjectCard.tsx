@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProjectCardProps {
   image: string;
@@ -10,40 +11,30 @@ interface ProjectCardProps {
   status?: string;
 }
 
-const ProjectCard = ({ image, title, description, category, externalLink, status }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, externalLink, status, slug }: ProjectCardProps) => {
   return (
     <article className="group">
-      {externalLink ? (
-        <a href={externalLink} target="_blank" rel="noopener noreferrer" className="block overflow-hidden mb-6">
-          <img
-            src={image}
-            alt={title}
-            className="project-image group-hover:scale-105 transition-transform duration-500"
-          />
-        </a>
-      ) : (
-        <div className="block overflow-hidden mb-6">
-          <img
-            src={image}
-            alt={title}
-            className="project-image"
-          />
-        </div>
-      )}
-      
+      <Link to={`/project/${slug}`} className="block overflow-hidden mb-6">
+        <img
+          src={image}
+          alt={title}
+          className="project-image group-hover:scale-105 transition-transform duration-500"
+        />
+      </Link>
+
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-xl font-medium">{title}</h3>
         <span className="category-tag">{category}</span>
       </div>
-      
+
       <p className="text-muted-foreground mb-6 max-w-md">
         {description}
       </p>
-      
+
       {externalLink ? (
-        <a 
-          href={externalLink} 
-          target="_blank" 
+        <a
+          href={externalLink}
+          target="_blank"
           rel="noopener noreferrer"
           className="btn-outline-portfolio"
         >

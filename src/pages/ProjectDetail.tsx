@@ -8,6 +8,76 @@ import projectAIDetail1 from "@/assets/project-ai-detail-1.jpg";
 import projectAIDetail2 from "@/assets/project-ai-detail-2.jpg";
 
 const projects = {
+  "inact": {
+    title: "InAct HRIS",
+    category: "APP",
+    year: "2024",
+    hero: projectBanking, // Placeholder
+    description: "Human Resource Information System mobile app for attendance tracking, scheduling, and employee management.",
+    role: "Lead UI/UX Designer",
+    duration: "3 months",
+    team: "2 designers, 4 developers",
+    images: [projectBankingDetail1, projectBankingDetail2], // Placeholder
+    overview: "InAct HRIS streamlines HR processes by providing a comprehensive mobile solution for employee management. It simplifies attendance tracking, leave requests, and scheduling, making HR tasks efficient and accessible.",
+    challenge: "Managing a disparate workforce with varying schedules and attendance needs was complex and error-prone. The challenge was to create a unified system that catered to both office and field employees.",
+    solution: "We designed a mobile-first experience with geofencing for accurate attendance, an intuitive shift management interface, and real-time notifications for approval workflows.",
+  },
+  "godly": {
+    title: "Godly",
+    category: "WEB",
+    year: "2024",
+    hero: projectAI, // Placeholder
+    description: "Window cleaning & pressure washing services landing page with modern UI design for South Florida market.",
+    role: "UI/UX Designer",
+    duration: "2 weeks",
+    team: "Solo Designer",
+    images: [projectAIDetail1, projectAIDetail2], // Placeholder
+    overview: "Godly is a premium service provider for window cleaning and pressure washing. The website was designed to reflect their high-quality service and attract high-end clients in the South Florida market.",
+    challenge: "The local market is competitive, and standing out required a brand image that communicated trust and excellence. The website needed to convert visitors into leads effectively.",
+    solution: "We utilized a clean, modern aesthetic with high-quality imagery and a clear value proposition. The booking flow was streamlined to maximize conversion rates.",
+  },
+  "niseko": {
+    title: "Niseko Home",
+    category: "WEB",
+    year: "2024",
+    hero: projectBanking, // Placeholder
+    description: "Luxury real estate platform for discovering and investing in exclusive properties in Niseko, Japan.",
+    role: "UI/UX Designer",
+    duration: "1 month",
+    team: "2 designers",
+    images: [projectBankingDetail1, projectBankingDetail2], // Placeholder
+    overview: "Niseko Home is the premier destination for luxury real estate in Niseko. The platform offers an exclusive selection of properties for discerning investors and homeowners.",
+    challenge: "Presenting detailed property information and high-value investment opportunities in a way that feels exclusive and trustworthy.",
+    solution: "We focused on a visual-first approach with immersive property galleries and detailed neighborhood guides to give users a sense of place and value.",
+  },
+  "qris": {
+    title: "QRIS Online",
+    category: "APP",
+    year: "2023",
+    hero: projectAI, // Placeholder
+    description: "Payment registration flow for QRIS merchant onboarding with document verification and business data collection.",
+    role: "UI/UX Designer",
+    duration: "2 months",
+    team: "3 designers, 5 developers",
+    images: [projectAIDetail1, projectAIDetail2], // Placeholder
+    overview: "QRIS Online simplifies the merchant onboarding process for QRIS payments. It guides business owners through document submission and verification seamlessly.",
+    challenge: "The regulatory requirements for merchant onboarding are complex and can be daunting for small business owners.",
+    solution: "We broke down the registration process into simple, guided steps with clear instructions and immediate feedback on document validity.",
+  },
+  "tgv": {
+    title: "TGV SNCF",
+    category: "APP",
+    year: "2023",
+    hero: projectBanking, // Placeholder
+    description: "Train booking interface redesign for TGV inOui with AI-powered search and modern ticketing experience.",
+    role: "UI/UX Designer",
+    duration: "3 months",
+    team: "4 designers",
+    images: [projectBankingDetail1, projectBankingDetail2], // Placeholder
+    overview: "The TGV SNCF app redesign focused on improving the booking experience and integrating smart features for travelers.",
+    challenge: "Users often found the existing booking flow cumbersome, especially for complex itineraries.",
+    solution: "We introduced AI-powered search suggestions and a streamlined booking flow that remembers user preferences and travel history.",
+  },
   "aether-banking": {
     title: "Aether Banking",
     category: "WEB",
