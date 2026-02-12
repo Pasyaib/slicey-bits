@@ -8,13 +8,13 @@ const designSkills = [
   "Usability Testing",
 ];
 
-const tools = ["Figma", "Framer", "Jitter"];
+const tools = ["Figma", "Framer", "Jitter", "Antigravity", "AI Studio"];
 
 const Capabilities = () => {
   return (
     <section className="container-portfolio section-spacing">
       <SectionHeader title="Capabilities" number="03" />
-      
+
       <div className="grid md:grid-cols-2 gap-12 md:gap-24">
         <div>
           <span className="section-label block mb-6 pb-4 border-b border-border">
@@ -28,7 +28,7 @@ const Capabilities = () => {
             ))}
           </ul>
         </div>
-        
+
         <div>
           <span className="section-label block mb-6 pb-4 border-b border-border">
             Tools
