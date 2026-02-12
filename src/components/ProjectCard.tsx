@@ -14,7 +14,7 @@ interface ProjectCardProps {
   status?: string;
 }
 
-const ProjectCard = ({ image, title, description, category, externalLink, status }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, description, category, externalLink, status, ctaLabel = "View Live" }: ProjectCardProps) => {
   return (
     <article className="group">
       <Dialog>
