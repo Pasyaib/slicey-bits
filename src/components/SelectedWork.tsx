@@ -29,7 +29,7 @@ const projects = [
     description: "Luxury real estate platform for discovering and investing in exclusive properties in Niseko, Japan.",
     category: "WEB",
     slug: "niseko",
-    status: "MVP Only",
+    externalLink: "https://www.figma.com/design/9bwayxQSvhvruNVXB7WGD1/Niseko--Copy-?m=auto&t=LrsjyNC9Dsx2jDp2-6",
   },
   {
     image: projectQris,
@@ -53,7 +53,7 @@ const SelectedWork = () => {
   return (
     <section className="container-portfolio section-spacing">
       <SectionHeader title="Selected Work" number="01" />
-      
+
       <div className="grid md:grid-cols-2 gap-12 md:gap-8">
         {projects.map((project) => (
           <ProjectCard key={project.title} {...project} />
