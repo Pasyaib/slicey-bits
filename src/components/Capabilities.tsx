@@ -8,18 +8,17 @@ const skills = [
   "UX Design",
   "Design Systems",
   "Prototyping",
-  "Usability Testing",
-  "Animation",
 ];
 
 const tools = [
   "Figma",
+  "FigJam",
   "Framer",
   "Jitter",
-  "Whimsical",
-  "Miro",
   "Antigravity",
   "AI Studio",
+  "ChatGPT",
+  "Gemini",
 ];
 
 const certifications = [
