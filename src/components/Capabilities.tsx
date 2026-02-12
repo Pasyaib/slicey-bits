@@ -1,27 +1,53 @@
 import SectionHeader from "./SectionHeader";
 
-const designSkills = [
+const skills = [
+  "Communication",
+  "Design Thinking",
+  "User Research",
   "UI & Visual Design",
-  "UX Research",
+  "UX Design",
   "Design Systems",
   "Prototyping",
   "Usability Testing",
+  "Animation",
 ];
 
-const tools = ["Figma", "Framer", "Jitter", "Antigravity", "AI Studio"];
+const tools = [
+  "Figma",
+  "Framer",
+  "Jitter",
+  "Whimsical",
+  "Miro",
+  "Antigravity",
+  "AI Studio",
+];
+
+const certifications = [
+  {
+    title: "Certified of UI/UX Design Fullstack",
+    issuer: "Rakamin Academy",
+    year: "2023",
+  },
+  {
+    title: "Certified of UX Design",
+    issuer: "Google / Coursera",
+    year: "",
+  },
+];
 
 const Capabilities = () => {
   return (
     <section className="container-portfolio section-spacing">
       <SectionHeader title="Capabilities" number="03" />
 
-      <div className="grid md:grid-cols-2 gap-12 md:gap-24">
+      <div className="grid md:grid-cols-3 gap-12 md:gap-8">
+        {/* Skills */}
         <div>
-          <span className="section-label block mb-6 pb-4 border-b border-border">
-            Design
-          </span>
+          <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
+            Skills
+          </h3>
           <ul className="space-y-3">
-            {designSkills.map((skill) => (
+            {skills.map((skill) => (
               <li key={skill} className="text-lg font-medium">
                 {skill}
               </li>
@@ -29,14 +55,32 @@ const Capabilities = () => {
           </ul>
         </div>
 
+        {/* Tools */}
         <div>
-          <span className="section-label block mb-6 pb-4 border-b border-border">
+          <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
             Tools
-          </span>
+          </h3>
           <ul className="space-y-3">
             {tools.map((tool) => (
               <li key={tool} className="text-lg font-medium">
                 {tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Certifications */}
+        <div>
+          <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
+            Certifications
+          </h3>
+          <ul className="space-y-6">
+            {certifications.map((cert, index) => (
+              <li key={index}>
+                <p className="text-lg font-medium">{cert.title}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {cert.issuer} {cert.year && `/ ${cert.year}`}
+                </p>
               </li>
             ))}
           </ul>
