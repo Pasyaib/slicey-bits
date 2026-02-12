@@ -30,6 +30,7 @@ const projects = [
     category: "WEB",
     slug: "niseko",
     externalLink: "https://www.figma.com/design/9bwayxQSvhvruNVXB7WGD1/Niseko--Copy-?m=auto&t=LrsjyNC9Dsx2jDp2-6",
+    ctaLabel: "Figma File",
   },
   {
     image: projectQris,
