@@ -1,7 +1,6 @@
 import SectionHeader from "./SectionHeader";
 
 const skills = [
-  "Communication",
   "Design Thinking",
   "User Research",
   "UI & Visual Design",
