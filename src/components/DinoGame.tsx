@@ -137,13 +137,20 @@ const DinoGame = () => {
         };
 
         const draw = () => {
+            // Check for dark mode to dynamic canvas colors
+            const isDark = document.documentElement.classList.contains('dark');
+            const mainColor = isDark ? '#fff' : '#000';
+            const secondaryColor = isDark ? '#000' : '#fff';
+            const groundColor = isDark ? '#666' : '#333';
+            const obstacleColor = isDark ? '#aaa' : '#666';
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Ground line
             ctx.beginPath();
             ctx.moveTo(0, canvas.height - 10);
             ctx.lineTo(canvas.width, canvas.height - 10);
-            ctx.strokeStyle = '#333';
+            ctx.strokeStyle = groundColor;
             ctx.lineWidth = 1;
             ctx.stroke();
 
@@ -151,7 +158,7 @@ const DinoGame = () => {
             const { x, y, width, height } = dinoRef.current;
             const isJump = !dinoRef.current.grounded;
 
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = mainColor;
 
             // Body (Rounder ellipse)
             ctx.beginPath();
@@ -174,17 +181,17 @@ const DinoGame = () => {
             ctx.fill();
 
             // Eyes (White circles + pupils)
-            ctx.fillStyle = '#fff';
+            ctx.fillStyle = secondaryColor;
             ctx.beginPath();
             ctx.arc(x + 38, y + 2, 3, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = mainColor;
             ctx.beginPath();
             ctx.arc(x + 39, y + 2, 1, 0, Math.PI * 2); // Pupil looking right
             ctx.fill();
 
             // Whiskers (Cute lines)
-            ctx.strokeStyle = '#fff';
+            ctx.strokeStyle = secondaryColor;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x + 42, y + 5);
@@ -194,7 +201,7 @@ const DinoGame = () => {
             ctx.stroke();
 
             // Legs (Animated)
-            ctx.fillStyle = '#000';
+            ctx.fillStyle = mainColor;
             const legOffset = Math.sin(frameRef.current * 0.5) * 5;
 
             if (isJump) {
@@ -210,7 +217,7 @@ const DinoGame = () => {
             }
 
             // Tail (Wiggly)
-            ctx.strokeStyle = '#000';
+            ctx.strokeStyle = mainColor;
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.moveTo(x + 5, y + 15);
@@ -219,7 +226,7 @@ const DinoGame = () => {
             ctx.stroke();
 
             // Obstacles
-            ctx.fillStyle = '#666';
+            ctx.fillStyle = obstacleColor;
             obstaclesRef.current.forEach((obstacle) => {
                 ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
             });
@@ -248,75 +255,97 @@ const DinoGame = () => {
             const ctx = canvas.getContext('2d');
             if (!ctx) return;
 
-            // Ensure size is full width of parent container
-            const resizeCanvas = () => {
-                const parent = canvas.parentElement;
-                if (parent) {
-                    canvas.width = parent.clientWidth;
-                    canvas.height = 150;
+            const drawInitialScreen = () => {
+                // Get dynamic colors based on current theme
+                const isDark = document.documentElement.classList.contains('dark');
+                const mainColor = isDark ? '#fff' : '#000';
+                const secondaryColor = isDark ? '#000' : '#fff';
+                const textColor = isDark ? '#aaa' : '#888';
+
+                // Ensure size is full width of parent container
+                const resizeCanvas = () => {
+                    const parent = canvas.parentElement;
+                    if (parent) {
+                        canvas.width = parent.clientWidth;
+                        canvas.height = 150;
+                    }
                 }
-            }
-            resizeCanvas();
+                resizeCanvas();
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#888';
-            ctx.font = '14px monospace';
-            ctx.textAlign = 'center';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = textColor;
+                ctx.font = '14px monospace';
+                ctx.textAlign = 'center';
 
-            // Minimalist Start/Game Over text
-            if (isGameOver) {
-                ctx.fillText(`GAME OVER • SCORE: ${score}`, canvas.width / 2, canvas.height / 2);
-                ctx.font = '12px monospace';
-                ctx.fillText('TAP TO RETRY', canvas.width / 2, canvas.height / 2 + 20);
-            } else {
-                ctx.fillText('PRESS SPACE or TAP TO PLAY', canvas.width / 2, canvas.height / 2);
+                // Minimalist Start/Game Over text
+                if (isGameOver) {
+                    ctx.fillText(`GAME OVER • SCORE: ${score}`, canvas.width / 2, canvas.height / 2);
+                    ctx.font = '12px monospace';
+                    ctx.fillText('TAP TO RETRY', canvas.width / 2, canvas.height / 2 + 20);
+                } else {
+                    ctx.fillText('PRESS SPACE or TAP TO PLAY', canvas.width / 2, canvas.height / 2);
 
-                // Draw static cute cat for intro
-                const x = canvas.width / 2 - 20;
-                const y = canvas.height / 2 + 30;
+                    // Draw static cute cat for intro
+                    const x = canvas.width / 2 - 20;
+                    const y = canvas.height / 2 + 30;
 
-                ctx.fillStyle = '#000';
+                    ctx.fillStyle = mainColor;
 
-                // Body
-                ctx.beginPath();
-                ctx.ellipse(x + 20, y + 15, 20, 12, 0, 0, Math.PI * 2);
-                ctx.fill();
+                    // Body
+                    ctx.beginPath();
+                    ctx.ellipse(x + 20, y + 15, 20, 12, 0, 0, Math.PI * 2);
+                    ctx.fill();
 
-                // Head
-                ctx.beginPath();
-                ctx.arc(x + 35, y + 5, 12, 0, Math.PI * 2);
-                ctx.fill();
+                    // Head
+                    ctx.beginPath();
+                    ctx.arc(x + 35, y + 5, 12, 0, Math.PI * 2);
+                    ctx.fill();
 
-                // Ears
-                ctx.beginPath();
-                ctx.moveTo(x + 28, y - 5);
-                ctx.lineTo(x + 32, y - 12);
-                ctx.lineTo(x + 36, y - 4);
-                ctx.moveTo(x + 36, y - 4);
-                ctx.lineTo(x + 40, y - 12);
-                ctx.lineTo(x + 44, y - 5);
-                ctx.fill();
+                    // Ears
+                    ctx.beginPath();
+                    ctx.moveTo(x + 28, y - 5);
+                    ctx.lineTo(x + 32, y - 12);
+                    ctx.lineTo(x + 36, y - 4);
+                    ctx.moveTo(x + 36, y - 4);
+                    ctx.lineTo(x + 40, y - 12);
+                    ctx.lineTo(x + 44, y - 5);
+                    ctx.fill();
 
-                // Eyes
-                ctx.fillStyle = '#fff';
-                ctx.beginPath();
-                ctx.arc(x + 38, y + 2, 3, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.fillStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(x + 39, y + 2, 1, 0, Math.PI * 2);
-                ctx.fill();
+                    // Eyes
+                    ctx.fillStyle = secondaryColor;
+                    ctx.beginPath();
+                    ctx.arc(x + 38, y + 2, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = mainColor;
+                    ctx.beginPath();
+                    ctx.arc(x + 39, y + 2, 1, 0, Math.PI * 2);
+                    ctx.fill();
 
-                // Tail
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(x + 5, y + 15);
-                ctx.quadraticCurveTo(x - 10, y + 5, x - 5, y - 5);
-                ctx.stroke();
-            }
+                    // Tail
+                    ctx.strokeStyle = mainColor;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(x + 5, y + 15);
+                    ctx.quadraticCurveTo(x - 10, y + 5, x - 5, y - 5);
+                    ctx.stroke();
+                }
+            };
+
+            drawInitialScreen();
+
+            // Listen for theme changes to redraw instantly
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class') {
+                        drawInitialScreen();
+                    }
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true });
+
+            return () => observer.disconnect();
         }
-    }, [isPlaying, isGameOver, score])
+    }, [isPlaying, isGameOver, score]);
 
     return (
         <div className="w-full select-none overflow-hidden relative">
