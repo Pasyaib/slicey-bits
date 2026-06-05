@@ -1,4 +1,5 @@
 import SectionHeader from "./SectionHeader";
+import ScrambleText from "./ScrambleText";
 
 const skills = [
   "Design Thinking",
@@ -42,7 +43,7 @@ const Capabilities = () => {
         {/* Skills */}
         <div>
           <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
-            Skills
+            <ScrambleText text="Skills" />
           </h3>
           <ul className="space-y-3">
             {skills.map((skill) => (
@@ -56,7 +57,7 @@ const Capabilities = () => {
         {/* Tools */}
         <div>
           <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
-            Tools
+            <ScrambleText text="Tools" />
           </h3>
           <ul className="space-y-3">
             {tools.map((tool) => (
@@ -70,7 +71,7 @@ const Capabilities = () => {
         {/* Certifications */}
         <div>
           <h3 className="text-xs text-muted-foreground uppercase tracking-wider mb-6">
-            Certifications
+            <ScrambleText text="Certifications" />
           </h3>
           <ul className="space-y-6">
             {certifications.map((cert, index) => (

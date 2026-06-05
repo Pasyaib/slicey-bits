@@ -1,4 +1,5 @@
 import DinoGame from "./DinoGame";
+import ScrambleText from "./ScrambleText";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
 
       {/* Large Headline */}
       <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight mb-16 max-w-4xl">
-        Let's build something meaningful together.
+        <ScrambleText text="Let's build something meaningful together." />
       </h2>
 
       {/* Links */}
@@ -19,7 +20,7 @@ const Footer = () => {
           href="mailto:Pasyaibrhm@gmail.com"
           className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
         >
-          Pasyaibrhm@gmail.com
+          <ScrambleText text="Pasyaibrhm@gmail.com" />
         </a>
         <a
           href="https://www.linkedin.com/in/sultanibrahimpasya/"
@@ -27,7 +28,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
         >
-          LinkedIn
+          <ScrambleText text="LinkedIn" />
         </a>
         <a
           href="https://dribbble.com/Pasyaibrhm"
@@ -35,7 +36,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
         >
-          Dribbble
+          <ScrambleText text="Dribbble" />
         </a>
         <a
           href="https://layers.to/pasyaibrhm"
@@ -43,7 +44,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-base md:text-lg font-medium underline underline-offset-4 hover:text-muted-foreground transition-colors"
         >
-          Layers
+          <ScrambleText text="Layers" />
         </a>
       </div>
 

@@ -1,3 +1,5 @@
+import ScrambleText from "./ScrambleText";
+
 interface SectionHeaderProps {
   title: string;
   number: string;
@@ -6,8 +8,12 @@ interface SectionHeaderProps {
 const SectionHeader = ({ title, number }: SectionHeaderProps) => {
   return (
     <div className="section-header mb-12">
-      <h2>{title}</h2>
-      <span className="section-number">({number})</span>
+      <h2>
+        <ScrambleText text={title} />
+      </h2>
+      <span className="section-number">
+        (<ScrambleText text={number} />)
+      </span>
     </div>
   );
 };

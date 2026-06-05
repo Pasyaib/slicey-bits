@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import ScrambleText from "./ScrambleText";
 
 const HeroSection = () => {
   return (
@@ -28,9 +29,9 @@ const HeroSection = () => {
         {/* Right Side: Main typographic headline */}
         <div className="md:col-span-8">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none mb-12 text-foreground">
-            Sultan<br />
-            Ibrahim<br />
-            Pasya
+            <ScrambleText text="Sultan" /><br />
+            <ScrambleText text="Ibrahim" /><br />
+            <ScrambleText text="Pasya" />
           </h1>
 
           {/* Sub-divider line */}
@@ -53,7 +54,7 @@ const HeroSection = () => {
                 rel="noopener noreferrer"
                 className="flex justify-between items-center py-3 hover:text-muted-foreground transition-colors group"
               >
-                <span>GET IN TOUCH</span>
+                <span><ScrambleText text="GET IN TOUCH" /></span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a 
@@ -62,7 +63,7 @@ const HeroSection = () => {
                 rel="noopener noreferrer"
                 className="flex justify-between items-center py-3 hover:text-muted-foreground transition-colors group"
               >
-                <span>INSTAGRAM</span>
+                <span><ScrambleText text="INSTAGRAM" /></span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a 
@@ -71,7 +72,7 @@ const HeroSection = () => {
                 rel="noopener noreferrer"
                 className="flex justify-between items-center py-3 hover:text-muted-foreground transition-colors group"
               >
-                <span>DRIBBBLE</span>
+                <span><ScrambleText text="DRIBBBLE" /></span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a 
@@ -80,7 +81,7 @@ const HeroSection = () => {
                 rel="noopener noreferrer"
                 className="flex justify-between items-center py-3 hover:text-muted-foreground transition-colors group"
               >
-                <span>LAYERS</span>
+                <span><ScrambleText text="LAYERS" /></span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>

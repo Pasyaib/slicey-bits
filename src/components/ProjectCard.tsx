@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import ScrambleText from "./ScrambleText";
 
 interface ProjectCardProps {
   image: string;
@@ -40,7 +41,9 @@ const ProjectCard = ({ image, title, description, category, externalLink, status
       </Dialog>
 
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-xl font-medium">{title}</h3>
+        <h3 className="text-xl font-medium">
+          <ScrambleText text={title} />
+        </h3>
         <span className="category-tag">{category}</span>
       </div>
 
@@ -55,7 +58,7 @@ const ProjectCard = ({ image, title, description, category, externalLink, status
           rel="noopener noreferrer"
           className="btn-outline-portfolio"
         >
-          {ctaLabel}
+          <ScrambleText text={ctaLabel} />
           <ArrowUpRight className="w-4 h-4" />
         </a>
       ) : status ? (

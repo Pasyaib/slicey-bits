@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ScrambleText from "./ScrambleText";
 
 const experiences = [
   {
@@ -102,11 +103,11 @@ const ExperienceList = ({ items }: { items: typeof experiences }) => {
                   className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors hover:text-foreground group-hover:text-muted-foreground underline decoration-1 underline-offset-4"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {exp.company} ↗
+                  <ScrambleText text={exp.company} /> ↗
                 </a>
               ) : (
                 <h3 className="company-name text-xl md:text-2xl font-medium md:flex-1 transition-colors group-hover:text-muted-foreground">
-                  {exp.company}
+                  <ScrambleText text={exp.company} />
                 </h3>
               )}
 
@@ -168,19 +169,19 @@ const Experience = () => {
             value="freelance"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-0 py-2 font-medium text-muted-foreground data-[state=active]:text-foreground transition-all hover:text-foreground"
           >
-            Freelance
+            <ScrambleText text="Freelance" />
           </TabsTrigger>
           <TabsTrigger
             value="fulltime"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-0 py-2 font-medium text-muted-foreground data-[state=active]:text-foreground transition-all hover:text-foreground"
           >
-            Full Time
+            <ScrambleText text="Full Time" />
           </TabsTrigger>
           <TabsTrigger
             value="parttime"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-0 py-2 font-medium text-muted-foreground data-[state=active]:text-foreground transition-all hover:text-foreground"
           >
-            Part Time
+            <ScrambleText text="Part Time" />
           </TabsTrigger>
         </TabsList>
 

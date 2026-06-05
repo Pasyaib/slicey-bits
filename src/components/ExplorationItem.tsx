@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ScrambleText from "./ScrambleText";
 
 interface ExplorationItemProps {
   images: string[];
@@ -18,7 +19,9 @@ const ExplorationItem = ({ images, category, title, slug }: ExplorationItemProps
         ))}
       </div>
       <span className="category-tag block mb-1">{category}</span>
-      <h3 className="text-lg font-medium group-hover:text-muted-foreground transition-colors">{title}</h3>
+      <h3 className="text-lg font-medium group-hover:text-muted-foreground transition-colors">
+        <ScrambleText text={title} />
+      </h3>
     </div>
   );
 

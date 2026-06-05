@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import ScrambleText from "./ScrambleText";
 
 const AnimeSection = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -100,9 +101,9 @@ const AnimeSection = () => {
 
             <div className="mb-12 flex items-baseline justify-between">
                 <h3 className="text-2xl md:text-3xl font-medium tracking-tight">
-                    Visual Diet
+                    <ScrambleText text="Visual Diet" />
                 </h3>
-                <span className="text-muted-foreground font-mono text-sm">(04.5) — WATCHLIST</span>
+                <span className="text-muted-foreground font-mono text-sm">(04.5) — <ScrambleText text="WATCHLIST" /></span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -127,7 +128,7 @@ const AnimeSection = () => {
                                 0{index + 1}
                             </span>
                             <h4 className={`text-xl font-medium leading-tight group-hover:underline underline-offset-4 decoration-1 transition-all duration-300 ${anime.image ? 'text-white' : 'group-hover:translate-x-1'}`}>
-                                {anime.title}
+                                <ScrambleText text={anime.title} />
                             </h4>
                         </div>
 
