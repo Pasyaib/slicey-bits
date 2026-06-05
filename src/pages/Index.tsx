@@ -3,7 +3,7 @@ import SelectedWork from "@/components/SelectedWork";
 import Explorations from "@/components/Explorations";
 import Experience from "@/components/Experience";
 import Capabilities from "@/components/Capabilities";
-import GameSection from "@/components/GameSection";
+
 import AnimeSection from "@/components/AnimeSection";
 import Footer from "@/components/Footer";
 
@@ -18,7 +18,7 @@ const Index = () => {
       <Explorations />
       <Experience />
       <Capabilities />
-      <GameSection />
+
       <AnimeSection />
       <Footer />
     </main>
