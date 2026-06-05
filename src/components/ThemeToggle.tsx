@@ -1,5 +1,5 @@
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "./theme-provider";
+import { useTheme, type Theme } from "./theme-provider";
 import { Button } from "@/components/ui/button";
 
 // A minimal Web Audio API generator to play TV Static/Glitch noise programmatically
@@ -52,8 +52,9 @@ export function ThemeToggle() {
         // Play the TV Static scratch immediately on click
         playGlitchSound();
 
-        const isDark = theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        const newTheme = isDark ? "light" : "dark";
+        let newTheme: Theme;
+        if (theme === "light") newTheme = "dark";
+        else newTheme = "light";
 
         // If browser doesn't support View Transitions API, just switch theme normally
         if (!document.startViewTransition) {

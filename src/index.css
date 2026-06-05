@@ -86,6 +86,38 @@
     --sidebar-border: 0 0% 15%;
     --sidebar-ring: 0 0% 60%;
   }
+
+  .sukuna {
+    --background: 0 0% 2%;
+    --foreground: 30 20% 90%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 30 20% 90%;
+
+    --popover: 0 0% 4%;
+    --popover-foreground: 30 20% 90%;
+
+    --primary: 0 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 50% 10%;
+    --secondary-foreground: 30 20% 90%;
+
+    --muted: 0 50% 8%;
+    --muted-foreground: 0 40% 60%;
+
+    --accent: 0 80% 20%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 60% 15%;
+    --input: 0 60% 15%;
+    --ring: 0 100% 45%;
+
+    --radius: 0rem;
+  }
 }
 
 @layer base {
