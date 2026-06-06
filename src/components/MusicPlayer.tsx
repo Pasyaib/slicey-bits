@@ -7,10 +7,13 @@ const MusicPlayer = () => {
 
   // Initialize Audio
   useEffect(() => {
-    audioRef.current = new Audio(
+    const audio = new Audio(
       "https://helenamp3mcr23231-dpmrmdke9v20.edgeone.app/mazzacky_my-chemical-romance-helena.mp3"
     );
-    audioRef.current.loop = true;
+    audio.preload = "auto";
+    audio.loop = true;
+    audio.load(); // Force the browser to start preloading/buffering immediately
+    audioRef.current = audio;
 
     return () => {
       if (audioRef.current) {
